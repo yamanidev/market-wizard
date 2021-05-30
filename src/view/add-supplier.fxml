@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="425.0" prefWidth="424.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.purchase_entry.AddSupplierController">
    <children>
       <Label layoutX="28.0" layoutY="108.0" text="Full Name">
@@ -27,7 +26,7 @@
       <TextField fx:id="fullNameTextField" layoutX="233.0" layoutY="111.0" prefHeight="30.0" prefWidth="175.0" />
       <TextField fx:id="phoneNumberTextField" layoutX="233.0" layoutY="161.0" prefHeight="30.0" prefWidth="175.0" />
       <TextField fx:id="wilayaTextField" layoutX="233.0" layoutY="213.0" prefHeight="30.0" prefWidth="175.0" />
-      <Button fx:id="confirmBtn" layoutX="121.0" layoutY="346.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="96.0" text="Confirm" />
+      <Button fx:id="confirmBtn" layoutX="121.0" layoutY="346.0" mnemonicParsing="false" onAction="#confirmOnClick" prefHeight="36.0" prefWidth="96.0" text="Confirm" />
       <Button fx:id="cancelBtn" layoutX="255.0" layoutY="346.0" mnemonicParsing="false" onAction="#cancelOnClick" prefHeight="36.0" prefWidth="96.0" text="Cancel" />
    </children>
 </AnchorPane>

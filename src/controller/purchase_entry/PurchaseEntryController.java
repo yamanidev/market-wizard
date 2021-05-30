@@ -25,7 +25,7 @@ public class PurchaseEntryController {
 
     public void addInvoiceOnClick(ActionEvent actionEvent) throws IOException {
         HelperMethods helper = new HelperMethods();
-        helper.openWindow("../../view/add-invoice.fxml", "Add Invoice");
+        helper.openWindow("add-invoice.fxml", "Add Invoice");
     }
 
     public void editInvoiceOnclick(ActionEvent actionEvent) {

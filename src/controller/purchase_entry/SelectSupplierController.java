@@ -24,6 +24,6 @@ public class SelectSupplierController {
 
     public void newSupplierOnClick(ActionEvent actionEvent) throws IOException {
         HelperMethods helper = new HelperMethods();
-        helper.openWindow("../../view/add-supplier.fxml", "Add New Supplier");
+        helper.openWindow("add-supplier.fxml", "Add New Supplier");
     }
 }

@@ -1,5 +1,7 @@
 package app;
 
+import app.utils.DBUtils;
+import app.utils.HelperMethods;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
