@@ -2,16 +2,24 @@ package controller.purchase_entry;
 
 import app.utils.DBUtils;
 import app.utils.HelperMethods;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import model.Supplier;
@@ -74,15 +82,11 @@ public class SelectSupplierController implements Initializable {
 
 
     public void newSupplierOnClick(ActionEvent actionEvent) throws IOException {
-        HelperMethods helper = new HelperMethods();
-        Stage window = helper.openWindow2("add-supplier.fxml", "Add New Supplier");
-        window.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent e) {
-                System.out.println("something");
-            }
+        Stage window = HelperMethods.openWindow2("add-supplier.fxml",
+                "Add New Supplier");
+        window.setOnHidden((e) -> {
+            updateSuppliers();
         });
-        window.close();
     }
 
 

@@ -39,8 +39,8 @@ public class HelperMethods {
         window.showAndWait();
     }
 
-    public Stage openWindow2(String fxmlFile, String windowTitle) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../../view/" + fxmlFile));
+    public static Stage openWindow2(String fxmlFile, String windowTitle) throws IOException {
+        Parent root = FXMLLoader.load(HelperMethods.class.getResource("../../view/" + fxmlFile));
         Scene scene = new Scene(root);
         Stage window = new Stage();
         Platform.runLater(root::requestFocus);
@@ -59,7 +59,7 @@ public class HelperMethods {
         window.setTitle(windowTitle);
         window.initModality(Modality.APPLICATION_MODAL);
         window.setAlwaysOnTop(true);
-        window.showAndWait();
+        window.show();
         return window;
     }
 
