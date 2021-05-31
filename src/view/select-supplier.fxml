@@ -9,12 +9,11 @@
 <AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.purchase_entry.SelectSupplierController">
    <children>
       <TextField layoutX="80.0" layoutY="21.0" prefHeight="36.0" prefWidth="491.0" promptText="Search for supplier" />
-      <TableView layoutX="35.0" layoutY="81.0" prefHeight="344.0" prefWidth="607.0">
+      <TableView fx:id="suppliersTableView" layoutX="35.0" layoutY="81.0" prefHeight="344.0" prefWidth="607.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="ID" />
-          <TableColumn prefWidth="211.0" text="Supplier " />
-            <TableColumn prefWidth="75.0" text="Wilaya" />
-            <TableColumn prefWidth="245.0" text="Phone Number" />
+          <TableColumn fx:id="supplierCol" prefWidth="211.0" text="Supplier " />
+            <TableColumn fx:id="wilayaCol" prefWidth="133.0" text="Wilaya" />
+            <TableColumn fx:id="phoneNumberCol" prefWidth="262.0" text="Phone Number" />
         </columns>
       </TableView>
       <Button fx:id="newSupplierBtn" layoutX="44.0" layoutY="441.0" mnemonicParsing="false" onAction="#newSupplierOnClick" prefHeight="36.0" prefWidth="129.0" text="New Supplier" />

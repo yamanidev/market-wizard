@@ -4,6 +4,8 @@ import app.utils.DBUtils;
 import app.utils.HelperMethods;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -29,12 +31,12 @@ public class AddSupplierController {
         window.close();
     }
 
-    public void addSupplier(String fullName, int phoneNumber, String wilaya) throws SQLException {
+    public void addSupplier(String fullName, String phoneNumber, String wilaya) throws SQLException {
         String sqlQuery = "INSERT INTO suppliers (full_name, phone_number, wilaya) VALUES (?, ?, ?)";
         try(Connection c = DBUtils.getConnectionWith("suppliers.db");
             PreparedStatement pstm = c.prepareStatement(sqlQuery)){
             pstm.setString(1, fullName);
-            pstm.setInt(2, phoneNumber);
+            pstm.setString(2, phoneNumber);
             pstm.setString(3, wilaya);
             pstm.execute();
 
@@ -64,11 +66,19 @@ public class AddSupplierController {
 
 
 
-    public void confirmOnClick(ActionEvent actionEvent) {
+    public void confirmOnClick(ActionEvent actionEvent) throws SQLException {
         if (validateFields()){
+            addSupplier(fullNameTextField.getText(), phoneNumberTextField.getText(),
+                    wilayaTextField.getText());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/drakkath/IdeaProjects/MarketWizard/src/view/select-supplier.fxml"));
+            SelectSupplierController x = (SelectSupplierController) loader.getController();
 
+            // Closing the window afterwards
+            Stage window = (Stage) cancelBtn.getScene().getWindow();
+            window.close();
         }
         else{
+            // Pick any injected FXML element in order to get the stage
             HelperMethods.emptyFieldsAlert((Stage) cancelBtn.getScene().getWindow());
         }
     }
