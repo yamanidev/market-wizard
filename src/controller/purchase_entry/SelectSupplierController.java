@@ -2,27 +2,19 @@ package controller.purchase_entry;
 
 import app.utils.DBUtils;
 import app.utils.HelperMethods;
-import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import model.Supplier;
+import model.SupplierNameHolder;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,9 +24,9 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class SelectSupplierController implements Initializable {
-    @FXML  public Button newSupplierBtn;
-    @FXML  public Button cancelBtn;
-    @FXML  public Button confirmBtn;
+    @FXML public Button newBtn;
+    @FXML public Button cancelBtn;
+    @FXML public Button confirmBtn;
     @FXML public TableView<Supplier> suppliersTableView;
     @FXML public TableColumn<Supplier, String> supplierCol;
     @FXML public TableColumn<Supplier, String> wilayaCol;
@@ -45,6 +37,7 @@ public class SelectSupplierController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        confirmBtn.disableProperty().bind(Bindings.isEmpty(suppliersTableView.getSelectionModel().getSelectedItems()));
         supplierCol.setCellValueFactory(new PropertyValueFactory<>("Supplier"));
         phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("PhoneNumber"));
         wilayaCol.setCellValueFactory(new PropertyValueFactory<>("Wilaya"));
@@ -80,9 +73,8 @@ public class SelectSupplierController implements Initializable {
         window.close();
     }
 
-
     public void newSupplierOnClick(ActionEvent actionEvent) throws IOException {
-        Stage window = HelperMethods.openWindow2("add-supplier.fxml",
+        Stage window = HelperMethods.openWindow("add-supplier.fxml",
                 "Add New Supplier");
         window.setOnHidden((e) -> {
             updateSuppliers();
@@ -90,4 +82,10 @@ public class SelectSupplierController implements Initializable {
     }
 
 
+    public void confirmOnClick(ActionEvent actionEvent) {
+        SupplierNameHolder.name = suppliersTableView.
+                getSelectionModel().getSelectedItem().supplier;
+        Stage window = (Stage) confirmBtn.getScene().getWindow();
+        window.close();
+    }
 }

@@ -16,30 +16,8 @@ import java.io.IOException;
 
 public class HelperMethods {
 
-    public void openWindow(String fxmlFile, String windowTitle) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../../view/" + fxmlFile));
-        Scene scene = new Scene(root);
-        Stage window = new Stage();
-        Platform.runLater(root::requestFocus);
-        scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Platform.runLater(root::requestFocus);
-            }
-        });
-        window.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
-            if (KeyCode.ESCAPE == event.getCode()) {
-                window.close();
-            }
-        });
-        window.setScene(scene);
-        window.setTitle(windowTitle);
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setAlwaysOnTop(true);
-        window.showAndWait();
-    }
 
-    public static Stage openWindow2(String fxmlFile, String windowTitle) throws IOException {
+    public static Stage openWindow(String fxmlFile, String windowTitle) throws IOException {
         Parent root = FXMLLoader.load(HelperMethods.class.getResource("../../view/" + fxmlFile));
         Scene scene = new Scene(root);
         Stage window = new Stage();

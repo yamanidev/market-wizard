@@ -4,6 +4,7 @@ import app.utils.HelperMethods;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -24,8 +25,7 @@ public class PurchaseEntryController {
 
 
     public void addInvoiceOnClick(ActionEvent actionEvent) throws IOException {
-        HelperMethods helper = new HelperMethods();
-        helper.openWindow("add-invoice.fxml", "Add Invoice");
+        Stage window = HelperMethods.openWindow("add-invoice.fxml", "Add Invoice");
     }
 
     public void editInvoiceOnclick(ActionEvent actionEvent) {
