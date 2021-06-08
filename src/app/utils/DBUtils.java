@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 public class DBUtils {
 
-    public static Connection getConnectionWith(String dbName){
+    public static Connection getConnection(){
         Connection connection = null;
         try {
-            String jdbcurl= "jdbc:sqlite:src/app/db/" + dbName;
+            String jdbcurl= "jdbc:sqlite:src/app/db/main.db";
             connection = DriverManager.getConnection(jdbcurl);
             System.out.println("Connected!");
         } catch (SQLException e ) {
@@ -17,7 +17,6 @@ public class DBUtils {
         }
         return connection;
     }
-
 
 
 }

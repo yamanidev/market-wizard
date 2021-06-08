@@ -11,7 +11,7 @@
       <TextField layoutX="80.0" layoutY="21.0" prefHeight="36.0" prefWidth="491.0" promptText="Search for supplier" />
       <TableView fx:id="suppliersTableView" layoutX="35.0" layoutY="81.0" prefHeight="344.0" prefWidth="607.0">
         <columns>
-          <TableColumn fx:id="supplierCol" prefWidth="211.0" text="Supplier " />
+          <TableColumn fx:id="supplierNameCol" prefWidth="211.0" text="Supplier " />
             <TableColumn fx:id="wilayaCol" prefWidth="133.0" text="Wilaya" />
             <TableColumn fx:id="phoneNumberCol" prefWidth="262.0" text="Phone Number" />
         </columns>

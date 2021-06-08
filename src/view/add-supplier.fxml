@@ -23,7 +23,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="fullNameTextField" layoutX="233.0" layoutY="111.0" prefHeight="30.0" prefWidth="175.0" />
+      <TextField fx:id="supplierNameTextField" layoutX="233.0" layoutY="111.0" prefHeight="30.0" prefWidth="175.0" />
       <TextField fx:id="phoneNumberTextField" layoutX="233.0" layoutY="161.0" prefHeight="30.0" prefWidth="175.0" />
       <TextField fx:id="wilayaTextField" layoutX="233.0" layoutY="213.0" prefHeight="30.0" prefWidth="175.0" />
       <Button fx:id="confirmBtn" layoutX="121.0" layoutY="346.0" mnemonicParsing="false" onAction="#confirmOnClick" prefHeight="36.0" prefWidth="96.0" text="Confirm" />

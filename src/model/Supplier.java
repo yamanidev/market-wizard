@@ -2,24 +2,31 @@ package model;
 
 public class Supplier {
 
-    public String supplier;
+    public int id;
+    public String supplierName;
     public String phoneNumber;
     public String wilaya;
-//    public int id;
 
-
-    public Supplier(String supplier, String phoneNumber, String wilaya) {
-        this.supplier = supplier;
+    public Supplier(String supplierName, String phoneNumber, String wilaya) {
+        this.supplierName = supplierName;
         this.phoneNumber = phoneNumber;
         this.wilaya = wilaya;
     }
 
-    public String getSupplier() {
-        return supplier;
+    public int getId() {
+        return id;
     }
 
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 
     public String getPhoneNumber() {

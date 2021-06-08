@@ -28,7 +28,7 @@ public class SelectSupplierController implements Initializable {
     @FXML public Button cancelBtn;
     @FXML public Button confirmBtn;
     @FXML public TableView<Supplier> suppliersTableView;
-    @FXML public TableColumn<Supplier, String> supplierCol;
+    @FXML public TableColumn<Supplier, String> supplierNameCol;
     @FXML public TableColumn<Supplier, String> wilayaCol;
     @FXML public TableColumn<Supplier, String> phoneNumberCol;
 
@@ -38,7 +38,7 @@ public class SelectSupplierController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         confirmBtn.disableProperty().bind(Bindings.isEmpty(suppliersTableView.getSelectionModel().getSelectedItems()));
-        supplierCol.setCellValueFactory(new PropertyValueFactory<>("Supplier"));
+        supplierNameCol.setCellValueFactory(new PropertyValueFactory<>("SupplierName"));
         phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("PhoneNumber"));
         wilayaCol.setCellValueFactory(new PropertyValueFactory<>("Wilaya"));
         suppliersTableView.setItems(getSuppliers());
@@ -50,7 +50,7 @@ public class SelectSupplierController implements Initializable {
 
     public ObservableList<Supplier> getSuppliers(){
         ObservableList<Supplier> list = FXCollections.observableArrayList();
-        Connection c = DBUtils.getConnectionWith("suppliers.db");
+        Connection c = DBUtils.getConnection();
         String sqlQuery = "select * from suppliers";
         Statement st;
         ResultSet rs;
@@ -58,8 +58,12 @@ public class SelectSupplierController implements Initializable {
             st = c.createStatement();
             rs = st.executeQuery(sqlQuery);
             Supplier supplier;
+
             while(rs.next()){
-                supplier = new Supplier(rs.getString("full_name"), rs.getString("phone_number"), rs.getString("wilaya"));
+                supplier = new Supplier(rs.getString("supplier_name"),
+                        rs.getString("phone_number"),
+                        rs.getString("wilaya"));
+
                 list.add(supplier);
             }
         }catch (Exception ex){
@@ -84,7 +88,7 @@ public class SelectSupplierController implements Initializable {
 
     public void confirmOnClick(ActionEvent actionEvent) {
         SupplierNameHolder.name = suppliersTableView.
-                getSelectionModel().getSelectedItem().supplier;
+                getSelectionModel().getSelectedItem().supplierName;
         Stage window = (Stage) confirmBtn.getScene().getWindow();
         window.close();
     }

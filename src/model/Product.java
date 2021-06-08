@@ -8,14 +8,15 @@ public class Product {
     double soldPrice;
     String expirationDate;
     String category;
+    int quantity;
 
-    public Product(int id, String name, double purchasedPrice, double soldPrice, String expirationDate, String category) {
-        this.id = id;
+    public Product(String name, double purchasedPrice, double soldPrice, String expirationDate, String category, int quantity) {
         this.name = name;
         this.purchasedPrice = purchasedPrice;
         this.soldPrice = soldPrice;
         this.expirationDate = expirationDate;
         this.category = category;
+        this.quantity = quantity;
     }
 
     public int getId() {
@@ -64,5 +65,13 @@ public class Product {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

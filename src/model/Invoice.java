@@ -5,14 +5,13 @@ public class Invoice {
 
     int id;
     String supplier;
-    int productsCount;
-    double totalSum;
+    String dateOfPurchase;
+    int productsCount = 0;
+    double totalSum = 0;
 
-    public Invoice(int id, String supplier, int productsCount, double totalSum) {
-        this.id = id;
+    public Invoice(String supplier, String dateOfPurchase) {
         this.supplier = supplier;
-        this.productsCount = productsCount;
-        this.totalSum = totalSum;
+        this.dateOfPurchase = dateOfPurchase;
     }
 
     public int getId() {
@@ -29,6 +28,14 @@ public class Invoice {
 
     public void setSupplier(String supplier) {
         this.supplier = supplier;
+    }
+
+    public String getDateOfPurchase() {
+        return dateOfPurchase;
+    }
+
+    public void setDateOfPurchase(String dateOfPurchase) {
+        this.dateOfPurchase = dateOfPurchase;
     }
 
     public int getProductsCount() {
