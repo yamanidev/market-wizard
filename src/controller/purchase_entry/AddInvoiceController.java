@@ -31,6 +31,8 @@ public class AddInvoiceController {
         window.setOnHidden((e) ->{
             selectedSupplierLabel.setText(SupplierNameHolder.name);
         });
+
+
     }
 
 

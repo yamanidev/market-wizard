@@ -2,6 +2,6 @@ package model;
 
 public class SupplierNameHolder {
 
-    public static String name = "";
+    public static String name = "Label";
 
 }
