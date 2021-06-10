@@ -2,13 +2,13 @@ package controller.purchase_entry;
 
 import app.utils.DBUtils;
 import app.utils.HelperMethods;
+import app.utils.NameHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import model.SupplierNameHolder;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -26,8 +26,8 @@ public class AddInvoiceController {
     final Connection c = DBUtils.getConnection();
 
     public void addInvoice(String supplier, String dateOfPurchase){
-        String sqlQuery = "INSERT INTO invoices (supplier, date_of_purchase, products_count, total_sum)" +
-                "VALUES (?, ?, 0, 0)";
+        String sqlQuery = "INSERT INTO invoices (supplier, date_of_purchase)" +
+                "VALUES (?, ?)";
         try(PreparedStatement pstm = c.prepareStatement(sqlQuery)){
             pstm.setString(1, supplier);
             pstm.setString(2, dateOfPurchase);
@@ -53,7 +53,7 @@ public class AddInvoiceController {
         Stage window = HelperMethods.openWindow("select-supplier.fxml",
                 "Something");
         window.setOnHidden((e) ->{
-            selectedSupplierLabel.setText(SupplierNameHolder.name);
+            selectedSupplierLabel.setText(NameHolder.supplierName);
         });
     }
 

@@ -7,7 +7,8 @@ public class Supplier {
     public String phoneNumber;
     public String wilaya;
 
-    public Supplier(String supplierName, String phoneNumber, String wilaya) {
+    public Supplier(int id, String supplierName, String phoneNumber, String wilaya) {
+        this.id = id;
         this.supplierName = supplierName;
         this.phoneNumber = phoneNumber;
         this.wilaya = wilaya;

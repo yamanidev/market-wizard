@@ -2,6 +2,7 @@ package controller.purchase_entry;
 
 import app.utils.DBUtils;
 import app.utils.HelperMethods;
+import app.utils.NameHolder;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +15,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Supplier;
-import model.SupplierNameHolder;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,8 +31,6 @@ public class SelectSupplierController implements Initializable {
     @FXML public TableColumn<Supplier, String> supplierNameCol;
     @FXML public TableColumn<Supplier, String> wilayaCol;
     @FXML public TableColumn<Supplier, String> phoneNumberCol;
-
-    public ObservableList<Supplier> suppliersList = FXCollections.observableArrayList();
 
 
     @Override
@@ -60,7 +58,8 @@ public class SelectSupplierController implements Initializable {
             Supplier supplier;
 
             while(rs.next()){
-                supplier = new Supplier(rs.getString("supplier_name"),
+                supplier = new Supplier(rs.getInt("id"),
+                        rs.getString("supplier_name"),
                         rs.getString("phone_number"),
                         rs.getString("wilaya"));
 
@@ -87,7 +86,7 @@ public class SelectSupplierController implements Initializable {
 
 
     public void confirmOnClick(ActionEvent actionEvent) {
-        SupplierNameHolder.name = suppliersTableView.
+        NameHolder.supplierName = suppliersTableView.
                 getSelectionModel().getSelectedItem().supplierName;
         Stage window = (Stage) confirmBtn.getScene().getWindow();
         window.close();

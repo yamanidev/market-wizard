@@ -45,13 +45,8 @@ public class AddSupplierController {
         String fullName = supplierNameTextField.getText();
         String phoneNumber = phoneNumberTextField.getText();
         String wilaya = wilayaTextField.getText();
-        if (fullName == null || fullName.isEmpty() || phoneNumber == null ||
-        phoneNumber.isEmpty() || wilaya == null || wilaya.isEmpty()){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return fullName != null && !fullName.isEmpty() && phoneNumber != null &&
+                !phoneNumber.isEmpty() && wilaya != null && !wilaya.isEmpty();
     }
 
 

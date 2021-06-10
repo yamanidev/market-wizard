@@ -9,7 +9,8 @@ public class Invoice {
     int productsCount = 0;
     double totalSum = 0;
 
-    public Invoice(String supplier, String dateOfPurchase) {
+    public Invoice(int id, String supplier, String dateOfPurchase) {
+        this.id = id;
         this.supplier = supplier;
         this.dateOfPurchase = dateOfPurchase;
     }
