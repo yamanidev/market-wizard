@@ -31,12 +31,14 @@ public class SelectSupplierController implements Initializable {
     @FXML public TableColumn<Supplier, String> supplierNameCol;
     @FXML public TableColumn<Supplier, String> wilayaCol;
     @FXML public TableColumn<Supplier, String> phoneNumberCol;
+    @FXML public TableColumn<Supplier, Integer> supplierIdCol;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         confirmBtn.disableProperty().bind(Bindings.isEmpty(suppliersTableView.getSelectionModel().getSelectedItems()));
         supplierNameCol.setCellValueFactory(new PropertyValueFactory<>("SupplierName"));
+        supplierIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("PhoneNumber"));
         wilayaCol.setCellValueFactory(new PropertyValueFactory<>("Wilaya"));
         suppliersTableView.setItems(getSuppliers());

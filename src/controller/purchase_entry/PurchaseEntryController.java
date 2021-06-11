@@ -57,6 +57,18 @@ public class PurchaseEntryController implements Initializable {
         priceOfUnitCol.setCellValueFactory(new PropertyValueFactory<>("PurhcasedPrice"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("Category"));
+
+        editInvoiceBtn.disableProperty().bind(Bindings.isEmpty(invoicesTableView
+                .getSelectionModel().getSelectedItems()));
+        deleteInvoiceBtn.disableProperty().bind(Bindings.isEmpty(invoicesTableView
+                .getSelectionModel().getSelectedItems()));
+
+        addProductBtn.disableProperty().bind(Bindings.isEmpty(invoicesTableView
+                .getSelectionModel().getSelectedItems()));
+        editProductBtn.disableProperty().bind(Bindings.isEmpty(productsTableView
+                .getSelectionModel().getSelectedItems()));
+        deleteProductBtn.disableProperty().bind(Bindings.isEmpty(productsTableView
+                .getSelectionModel().getSelectedItems()));
     }
 
     private ObservableList<Invoice> getInvoices() {

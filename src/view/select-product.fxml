@@ -6,18 +6,18 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.purchase_entry.SelectProductController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.purchase_entry.SelectProductController">
    <children>
       <TextField layoutX="105.0" layoutY="30.0" prefHeight="36.0" prefWidth="491.0" promptText="Search for product" />
-      <TableView fx:id="productsTableView" layoutX="33.0" layoutY="98.0" prefHeight="344.0" prefWidth="635.0">
+      <TableView fx:id="productsTableView" layoutX="33.0" layoutY="98.0" prefHeight="344.0" prefWidth="734.0">
          <columns>
-            <TableColumn fx:id="productNameCol" prefWidth="75.0" text="Product" />
+            <TableColumn fx:id="productIdCol" prefWidth="39.0" text="ID" />
+            <TableColumn fx:id="productNameCol" prefWidth="111.0" text="Product" />
             <TableColumn fx:id="purchasedPriceCol" prefWidth="134.0" text="Purchased Price" />
             <TableColumn fx:id="soldPriceCol" prefWidth="94.0" text="Sold Price" />
             <TableColumn fx:id="quantityCol" prefWidth="90.0" text="Quantity" />
             <TableColumn fx:id="categoryCol" prefWidth="88.0" text="Category" />
-            <TableColumn fx:id="expirationDateCol" prefWidth="153.0" text="Expiration Date" />
+            <TableColumn fx:id="expirationDateCol" prefWidth="177.0" text="Expiration Date" />
          </columns>
       </TableView>
       <Button fx:id="newProductBtn" layoutX="54.0" layoutY="451.0" mnemonicParsing="false" onAction="#newProductOnClick" prefHeight="36.0" prefWidth="129.0" text="New Product" />

@@ -33,11 +33,14 @@ public class SelectProductController implements Initializable {
     public TableColumn<Product,Integer> quantityCol;
     public TableColumn<Product, String> categoryCol;
     public TableColumn<Product, String> expirationDateCol;
+    public TableColumn<Product, Integer> productIdCol;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        confirmBtn.disableProperty().bind(Bindings.isEmpty(productsTableView.getSelectionModel().getSelectedItems()));
+        confirmBtn.disableProperty().bind(Bindings.isEmpty(productsTableView
+                .getSelectionModel().getSelectedItems()));
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         purchasedPriceCol.setCellValueFactory(new PropertyValueFactory<>("purchasedPrice"));
         soldPriceCol.setCellValueFactory(new PropertyValueFactory<>("soldPrice"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));

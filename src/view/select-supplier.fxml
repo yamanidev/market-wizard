@@ -11,9 +11,10 @@
       <TextField layoutX="80.0" layoutY="21.0" prefHeight="36.0" prefWidth="491.0" promptText="Search for supplier" />
       <TableView fx:id="suppliersTableView" layoutX="35.0" layoutY="81.0" prefHeight="344.0" prefWidth="607.0">
         <columns>
-          <TableColumn fx:id="supplierNameCol" prefWidth="211.0" text="Supplier " />
-            <TableColumn fx:id="wilayaCol" prefWidth="133.0" text="Wilaya" />
-            <TableColumn fx:id="phoneNumberCol" prefWidth="262.0" text="Phone Number" />
+            <TableColumn fx:id="supplierIdCol" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="supplierNameCol" prefWidth="171.0" text="Supplier " />
+            <TableColumn fx:id="wilayaCol" prefWidth="146.0" text="Wilaya" />
+            <TableColumn fx:id="phoneNumberCol" prefWidth="214.0" text="Phone Number" />
         </columns>
       </TableView>
       <Button fx:id="newBtn" layoutX="44.0" layoutY="441.0" mnemonicParsing="false" onAction="#newSupplierOnClick" prefHeight="36.0" prefWidth="129.0" text="New Supplier" />

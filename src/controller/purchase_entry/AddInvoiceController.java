@@ -40,13 +40,8 @@ public class AddInvoiceController {
     }
 
     public boolean validateFields(){
-        if (dateOfPurchaseDatePicker.getValue() == null ||
-                selectedSupplierLabel.getText().equals("Label")){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return dateOfPurchaseDatePicker.getValue() != null &&
+                !selectedSupplierLabel.getText().equals("Label");
     }
 
     public void selectOnClick(ActionEvent actionEvent) throws IOException {

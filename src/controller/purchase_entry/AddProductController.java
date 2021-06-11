@@ -15,6 +15,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 
+import static app.utils.HelperMethods.isNumeric;
+
 public class AddProductController {
     @FXML public DatePicker expirationDatePicker;
     @FXML public TextField purchasedPriceTextField;
@@ -59,7 +61,9 @@ public class AddProductController {
                 soldPrice != null && !soldPrice.isEmpty() &&
                 quantity != null && !quantity.isEmpty() &&
                 category != null && !category.isEmpty() &&
-                productName != null && !productName.isEmpty();
+                productName != null && !productName.isEmpty() &&
+                isNumeric(purchasedPrice) && isNumeric(quantity) &&
+                isNumeric(soldPrice);
     }
 
 

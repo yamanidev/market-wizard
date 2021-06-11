@@ -6,35 +6,35 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.purchase_entry.PurchaseEntryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.purchase_entry.PurchaseEntryController">
    <children>
-      <TableView fx:id="invoicesTableView" layoutX="55.0" layoutY="61.0" prefHeight="300.0" prefWidth="750.0">
+      <TableView fx:id="invoicesTableView" layoutX="32.0" layoutY="29.0" prefHeight="293.0" prefWidth="571.0">
           <placeholder>
               <Label />
           </placeholder>
         <columns>
-            <TableColumn fx:id="invoiceIdCol" prefWidth="122.0" style="-fx-alignment: CENTER;" text="ID" />
-          <TableColumn fx:id="dateOfPurchaseCol" prefWidth="381.0" style="-fx-alignment: CENTER;" text="Date of Purchase" />
-            <TableColumn fx:id="supplierCol" prefWidth="246.0" style="-fx-alignment: CENTER;" text="Supplier" />
+            <TableColumn fx:id="invoiceIdCol" minWidth="2.0" prefWidth="55.0" style="-fx-alignment: CENTER;" text="ID" />
+          <TableColumn fx:id="dateOfPurchaseCol" prefWidth="226.0" style="-fx-alignment: CENTER;" text="Date of Purchase" />
+            <TableColumn fx:id="supplierCol" prefWidth="289.0" style="-fx-alignment: CENTER;" text="Supplier" />
         </columns>
       </TableView>
-      <TableView fx:id="productsTableView" layoutX="56.0" layoutY="472.0" prefHeight="300.0" prefWidth="758.0">
+      <TableView fx:id="productsTableView" layoutX="32.0" layoutY="347.0" prefHeight="215.0" prefWidth="628.0">
           <placeholder>
               <Label />
           </placeholder>
          <columns>
             <TableColumn fx:id="productIdCol" prefWidth="81.0" text="ID" />
-            <TableColumn fx:id="productCol" prefWidth="200.0" text="Product" />
-            <TableColumn fx:id="priceOfUnitCol" prefWidth="155.0" text="Price of Unit" />
-            <TableColumn fx:id="quantityCol" prefWidth="143.0" text="Quantity" />
-            <TableColumn fx:id="categoryCol" prefWidth="178.0" text="Category" />
+            <TableColumn fx:id="productCol" prefWidth="97.0" text="Product" />
+            <TableColumn fx:id="priceOfUnitCol" prefWidth="132.0" text="Price of Unit" />
+            <TableColumn fx:id="quantityCol" prefWidth="102.0" text="Quantity" />
+            <TableColumn fx:id="categoryCol" prefWidth="215.0" text="Category" />
          </columns>
       </TableView>
-      <Button fx:id="addInvoiceBtn" layoutX="1058.0" layoutY="120.0" mnemonicParsing="false" onAction="#addInvoiceOnClick" prefHeight="36.0" prefWidth="137.0" text="Add Invoice" />
-      <Button fx:id="editInvoiceBtn" layoutX="1058.0" layoutY="175.0" mnemonicParsing="false" onAction="#editInvoiceOnclick" prefHeight="36.0" prefWidth="137.0" text="Edit Invoice" />
-      <Button fx:id="deleteInvoiceBtn" layoutX="1058.0" layoutY="227.0" mnemonicParsing="false" onAction="#deleteInvoiceOnClick" prefHeight="36.0" prefWidth="137.0" text="Delete Invoice" />
-      <Button fx:id="addProductBtn" layoutX="1058.0" layoutY="505.0" mnemonicParsing="false" onAction="#addProductOnClick" prefHeight="36.0" prefWidth="137.0" text="Add Product" />
-      <Button fx:id="editProductBtn" layoutX="1058.0" layoutY="562.0" mnemonicParsing="false" onAction="#editProductOnClick" prefHeight="36.0" prefWidth="137.0" text="Edit Product" />
-      <Button fx:id="deleteProductBtn" layoutX="1058.0" layoutY="616.0" mnemonicParsing="false" onAction="#deleteProductOnClick" prefHeight="36.0" prefWidth="137.0" text="Delete Product" />
+      <Button fx:id="addInvoiceBtn" layoutX="794.0" layoutY="34.0" mnemonicParsing="false" onAction="#addInvoiceOnClick" prefHeight="36.0" prefWidth="137.0" text="Add Invoice" />
+      <Button fx:id="editInvoiceBtn" layoutX="794.0" layoutY="89.0" mnemonicParsing="false" onAction="#editInvoiceOnclick" prefHeight="36.0" prefWidth="137.0" text="Edit Invoice" />
+      <Button fx:id="deleteInvoiceBtn" layoutX="794.0" layoutY="141.0" mnemonicParsing="false" onAction="#deleteInvoiceOnClick" prefHeight="36.0" prefWidth="137.0" text="Delete Invoice" />
+      <Button fx:id="addProductBtn" layoutX="794.0" layoutY="419.0" mnemonicParsing="false" onAction="#addProductOnClick" prefHeight="36.0" prefWidth="137.0" text="Add Product" />
+      <Button fx:id="editProductBtn" layoutX="794.0" layoutY="476.0" mnemonicParsing="false" onAction="#editProductOnClick" prefHeight="36.0" prefWidth="137.0" text="Edit Product" />
+      <Button fx:id="deleteProductBtn" layoutX="794.0" layoutY="530.0" mnemonicParsing="false" onAction="#deleteProductOnClick" prefHeight="36.0" prefWidth="137.0" text="Delete Product" />
    </children>
 </AnchorPane>
