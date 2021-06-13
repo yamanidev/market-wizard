@@ -53,8 +53,7 @@ public class AddInvoiceController {
     }
 
     public void cancelOnClick(ActionEvent actionEvent) {
-        Stage window = (Stage) cancelBtn.getScene().getWindow();
-        window.close();
+        ((Stage) cancelBtn.getScene().getWindow()).close();
     }
 
     public void confirmOnClick(ActionEvent actionEvent) {
@@ -62,8 +61,7 @@ public class AddInvoiceController {
             addInvoice(selectedSupplierLabel.getText(),
                     dateOfPurchaseDatePicker.getValue().
                             format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-            Stage window = (Stage) cancelBtn.getScene().getWindow();
-            window.close();
+            ((Stage) cancelBtn.getScene().getWindow()).close();
         }
         else{
             HelperMethods.emptyFieldsAlert((Stage) cancelBtn.getScene().getWindow());

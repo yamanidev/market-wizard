@@ -19,10 +19,8 @@ public class AddSupplierController {
     @FXML public TextField supplierNameTextField;
     final Connection c = DBUtils.getConnection();
 
-
     public void cancelOnClick(ActionEvent actionEvent) {
-        Stage window = (Stage) cancelBtn.getScene().getWindow();
-        window.close();
+        ((Stage) cancelBtn.getScene().getWindow()).close();
     }
 
     public void addSupplier(String supplierName, String phoneNumber, String wilaya) {
@@ -49,14 +47,11 @@ public class AddSupplierController {
                 !phoneNumber.isEmpty() && wilaya != null && !wilaya.isEmpty();
     }
 
-
-
     public void confirmOnClick(ActionEvent actionEvent) throws SQLException {
         if (validateFields()){
             addSupplier(supplierNameTextField.getText(), phoneNumberTextField.getText(),
                     wilayaTextField.getText());
-            Stage window = (Stage) cancelBtn.getScene().getWindow();
-            window.close();
+            ((Stage) cancelBtn.getScene().getWindow()).close();
         }
         else{
             // Pick any injected FXML element in order to get the stage

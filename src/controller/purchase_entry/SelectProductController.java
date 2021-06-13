@@ -17,9 +17,7 @@ import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class SelectProductController implements Initializable {
@@ -35,6 +33,8 @@ public class SelectProductController implements Initializable {
     public TableColumn<Product, String> expirationDateCol;
     public TableColumn<Product, Integer> productIdCol;
 
+    final Connection c = DBUtils.getConnection();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         confirmBtn.disableProperty().bind(Bindings.isEmpty(productsTableView
@@ -49,6 +49,22 @@ public class SelectProductController implements Initializable {
         updateProducts();
     }
 
+    public void addProductToInvoice(){
+        String sqlQuery = "INSERT INTO invoices_products (invoice_id," +
+                "product_id) VALUES (?, ?)";
+
+        try(PreparedStatement pstm = c.prepareStatement(sqlQuery)) {
+            pstm.setInt(1, NameHolder.invoiceId);
+            pstm.setInt(2, productsTableView.getSelectionModel().
+                    getSelectedItem().getId());
+            pstm.execute();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+    }
+
     public ObservableList<Product> getProducts(){
         ObservableList<Product> list = FXCollections.observableArrayList();
         Connection c = DBUtils.getConnection();
@@ -61,8 +77,8 @@ public class SelectProductController implements Initializable {
             Product product;
 
             while(rs.next()){
-                product = new Product(rs.getInt("id"),
-                        rs.getString("name"),
+                product = new Product(rs.getInt("product_id"),
+                        rs.getString("product_name"),
                         rs.getDouble("purchased_price"),
                         rs.getDouble("sold_price"),
                         rs.getString("expiration_date"),
@@ -95,6 +111,8 @@ public class SelectProductController implements Initializable {
     }
 
     public void confirmOnClick(ActionEvent actionEvent) {
+        addProductToInvoice();
+        ((Stage) cancelBtn.getScene().getWindow()).close();
     }
 
 

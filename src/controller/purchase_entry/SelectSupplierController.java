@@ -60,7 +60,7 @@ public class SelectSupplierController implements Initializable {
             Supplier supplier;
 
             while(rs.next()){
-                supplier = new Supplier(rs.getInt("id"),
+                supplier = new Supplier(rs.getInt("supplier_id"),
                         rs.getString("supplier_name"),
                         rs.getString("phone_number"),
                         rs.getString("wilaya"));

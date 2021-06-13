@@ -75,8 +75,7 @@ public class AddProductController {
                     Integer.parseInt(quantityTextField.getText()),
                     categoryTextField.getText(), expirationDatePicker.getValue().
                             format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-            Stage window = (Stage) cancelBtn.getScene().getWindow();
-            window.close();
+            ((Stage) cancelBtn.getScene().getWindow()).close();
         }
         else {
             HelperMethods.emptyFieldsAlert((Stage) cancelBtn.getScene().getWindow());
@@ -84,7 +83,6 @@ public class AddProductController {
     }
 
     public void cancelOnClick(ActionEvent actionEvent) {
-        Stage window = (Stage) cancelBtn.getScene().getWindow();
-        window.close();
+        ((Stage) cancelBtn.getScene().getWindow()).close();
     }
 }

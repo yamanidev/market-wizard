@@ -2,6 +2,7 @@ package controller.purchase_entry;
 
 import app.utils.DBUtils;
 import app.utils.HelperMethods;
+import app.utils.NameHolder;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
@@ -43,7 +45,7 @@ public class PurchaseEntryController implements Initializable {
     @FXML public TableColumn<Product, Double> priceOfUnitCol;
     @FXML public TableColumn<Product, Integer> quantityCol;
     @FXML public TableColumn<Product, String> categoryCol;
-
+    final Connection c = DBUtils.getConnection();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,7 +56,7 @@ public class PurchaseEntryController implements Initializable {
 
         productIdCol.setCellValueFactory(new PropertyValueFactory<>("Id"));
         productCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        priceOfUnitCol.setCellValueFactory(new PropertyValueFactory<>("PurhcasedPrice"));
+        priceOfUnitCol.setCellValueFactory(new PropertyValueFactory<>("PurchasedPrice"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("Category"));
 
@@ -69,11 +71,23 @@ public class PurchaseEntryController implements Initializable {
                 .getSelectionModel().getSelectedItems()));
         deleteProductBtn.disableProperty().bind(Bindings.isEmpty(productsTableView
                 .getSelectionModel().getSelectedItems()));
+
+
+        invoicesTableView.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldValue, newValue) ->{
+                    System.out.println(newValue.getId());
+                    try {
+                        updateProducts();
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
+        );
+
     }
 
     private ObservableList<Invoice> getInvoices() {
         ObservableList<Invoice> list = FXCollections.observableArrayList();
-        Connection c = DBUtils.getConnection();
         String sqlQuery = "select * from invoices";
         Statement st;
         ResultSet rs;
@@ -83,7 +97,7 @@ public class PurchaseEntryController implements Initializable {
             Invoice invoice;
 
             while(rs.next()){
-                invoice = new Invoice(rs.getInt("id"),
+                invoice = new Invoice(rs.getInt("invoice_id"),
                         rs.getString("supplier"),
                         rs.getString("date_of_purchase"));
 
@@ -95,8 +109,47 @@ public class PurchaseEntryController implements Initializable {
         return list;
     }
 
+    private ObservableList<Product> getProducts(int invoiceId) throws SQLException {
+        ObservableList<Product> list = FXCollections.observableArrayList();
+        String sqlQuery = "select products.product_id, products.product_name," +
+                "products.purchased_price, products.expiration_date," +
+                "products.sold_price, products.quantity," +
+                "products.category from products\n" +
+                "join invoices_products on" +
+                "(products.product_id = invoices_products.product_id)\n" +
+                "join invoices on" +
+                "(invoices.invoice_id = invoices_products.invoice_id)\n" +
+                "where invoices.invoice_id = " + invoiceId;
+
+        Product product;
+        try {
+            Statement st = c.createStatement();
+            ResultSet rs = st.executeQuery(sqlQuery);
+            while(rs.next()){
+                product = new Product(rs.getInt("product_id"),
+                        rs.getString("product_name"),
+                        rs.getDouble("purchased_price"),
+                        rs.getDouble("sold_price"),
+                        rs.getString("expiration_date"),
+                        rs.getString("category"),
+                        rs.getInt("quantity"));
+                list.add(product);
+            }
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
     public void updateInvoices(){
         invoicesTableView.setItems(getInvoices());
+    }
+
+    public void updateProducts() throws SQLException {
+        productsTableView.setItems(getProducts(
+                invoicesTableView.getSelectionModel().getSelectedItem().getId()
+        ));
     }
 
     public void addInvoiceOnClick(ActionEvent actionEvent) throws IOException {
@@ -113,9 +166,17 @@ public class PurchaseEntryController implements Initializable {
     public void deleteInvoiceOnClick(ActionEvent actionEvent) {
     }
 
-    public void addProductOnClick(ActionEvent actionEvent) throws IOException {
+    public void addProductOnClick(ActionEvent actionEvent) throws IOException{
         Stage window = HelperMethods.openWindow("select-product.fxml", "Select product");
-
+        NameHolder.invoiceId = invoicesTableView.getSelectionModel().
+                getSelectedItem().getId();
+        window.setOnHidden((e) -> {
+            try {
+                updateProducts();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
     }
 
     public void editProductOnClick(ActionEvent actionEvent) {
