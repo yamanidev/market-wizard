@@ -12,24 +12,38 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class AddSupplierController {
-    @FXML public Button confirmBtn;
-    @FXML public Button cancelBtn;
-    @FXML public TextField wilayaTextField;
-    @FXML public TextField phoneNumberTextField;
-    @FXML public TextField supplierNameTextField;
-    final Connection c = DBUtils.getConnection();
+    @FXML private TextField nameTextField;
+    @FXML private TextField phoneNumberTextField;
+    @FXML private TextField addressTextField;
+    @FXML private TextField registryTextField;
+    @FXML private TextField nifTextField;
+    @FXML private TextField nisTextField;
+    @FXML private Button confirmBtn;
+    @FXML private Button cancelBtn;
 
-    public void cancelOnClick(ActionEvent actionEvent) {
+    public void cancelOnClick(ActionEvent actionEvent){
         ((Stage) cancelBtn.getScene().getWindow()).close();
     }
 
-    public void addSupplier(String supplierName, String phoneNumber, String wilaya) {
-        String sqlQuery = "INSERT INTO suppliers (supplier_name, phone_number, wilaya)" +
-                "VALUES (?, ?, ?)";
-        try(PreparedStatement pstm = c.prepareStatement(sqlQuery)){
-            pstm.setString(1, supplierName);
+    public void addSupplier(String name, String phoneNumber, String address,
+                            String registry, String nif, String nis) {
+        registry = !registry.isEmpty() ? registry : "None";
+        nif = !nif.isEmpty() ? nif : "None";
+        nis = !nis.isEmpty() ? nis : "None";
+
+        System.out.println("registry = " + registry);
+        System.out.println("nif = " + nif);
+        System.out.println("nis = " + nis);
+        String sqlQuery = "INSERT INTO suppliers (supplier_name, phone_number, address, registry, nif, nis)" +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+        try(Connection c = DBUtils.getConnection();
+            PreparedStatement pstm = c.prepareStatement(sqlQuery)){
+            pstm.setString(1, name);
             pstm.setString(2, phoneNumber);
-            pstm.setString(3, wilaya);
+            pstm.setString(3, address);
+            pstm.setString(4, registry);
+            pstm.setString(5, nif);
+            pstm.setString(6, nis);
             pstm.execute();
         }
         catch (SQLException e){
@@ -40,22 +54,21 @@ public class AddSupplierController {
 
 
     public boolean validateFields(){
-        String fullName = supplierNameTextField.getText();
-        String phoneNumber = phoneNumberTextField.getText();
-        String wilaya = wilayaTextField.getText();
-        return fullName != null && !fullName.isEmpty() && phoneNumber != null &&
-                !phoneNumber.isEmpty() && wilaya != null && !wilaya.isEmpty();
+        return nameTextField.getText() != null && phoneNumberTextField.getText() != null &&
+                addressTextField.getText() != null && !nameTextField.getText().trim().isEmpty() &&
+                !phoneNumberTextField.getText().trim().isEmpty() && !addressTextField.getText().trim().isEmpty() &&
+                HelperMethods.isAlpha(nameTextField.getText()) && HelperMethods.isNumeric(phoneNumberTextField.getText());
     }
 
-    public void confirmOnClick(ActionEvent actionEvent) throws SQLException {
+    public void confirmOnClick(ActionEvent actionEvent){
         if (validateFields()){
-            addSupplier(supplierNameTextField.getText(), phoneNumberTextField.getText(),
-                    wilayaTextField.getText());
+            addSupplier(nameTextField.getText(), phoneNumberTextField.getText(),
+                    addressTextField.getText(), registryTextField.getText(),
+                    nifTextField.getText(), nisTextField.getText());
             ((Stage) cancelBtn.getScene().getWindow()).close();
         }
         else{
-            // Pick any injected FXML element in order to get the stage
-            HelperMethods.emptyFieldsAlert((Stage) cancelBtn.getScene().getWindow());
+            HelperMethods.invalidFieldsAlert((Stage) cancelBtn.getScene().getWindow());
         }
     }
 }

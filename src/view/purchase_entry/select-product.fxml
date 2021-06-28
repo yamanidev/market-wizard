@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" style="-fx-border-color: #23B883; -fx-border-width: 6px;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.purchase_entry.SelectProductController">
+    <children>
+        <TextField layoutX="64.0" layoutY="101.0" prefHeight="36.0" prefWidth="708.0" promptText="Searsh for Product" style="-fx-background-color: #EBEBEB; -fx-border-color: #23B883;" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </TextField>
+        <Button fx:id="cancelBtn" alignment="CENTER" layoutX="577.0" layoutY="426.0" mnemonicParsing="false" onAction="#cancelOnClick" prefHeight="0.0" prefWidth="164.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="35.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button fx:id="confirmBtn" contentDisplay="CENTER" layoutX="405.0" layoutY="399.0" mnemonicParsing="false" onAction="#confirmOnClick" prefHeight="0.0" prefWidth="164.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 10;" text="Confirm" textFill="WHITE" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="220.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button fx:id="newProductBtn" alignment="CENTER" layoutX="50.0" layoutY="395.0" mnemonicParsing="false" onAction="#newProductOnClick" prefHeight="21.0" prefWidth="190.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 10;" text="New Product" textFill="WHITE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="35.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Label layoutX="290.0" layoutY="35.0" prefHeight="31.0" prefWidth="252.0" text="Select Product" textFill="#0a6b49" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="35.0">
+            <font>
+                <Font name="System Bold" size="26.0" />
+            </font>
+        </Label>
+      <TableView fx:id="productsTableView" layoutX="43.0" layoutY="108.0" prefHeight="270.0" prefWidth="718.0" style="-fx-border-color: #23B883; -fx-table-cell-border-color: #23B883;" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="155.0">
+         <columns>
+            <TableColumn fx:id="productIdCol" prefWidth="56.0" text="ID" />
+            <TableColumn fx:id="productNameCol" prefWidth="163.0" text="Product" />
+            <TableColumn fx:id="purchasedPriceCol" prefWidth="141.0" text="Purchased Price" />
+            <TableColumn fx:id="soldPriceCol" prefWidth="110.0" text="Sold Price" />
+            <TableColumn fx:id="quantityCol" prefWidth="96.0" text="Quantity" />
+            <TableColumn fx:id="categoryCol" prefWidth="150.0" text="Category" />
+         </columns>
+      </TableView>
+    </children>
+</AnchorPane>

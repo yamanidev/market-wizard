@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 
 import static app.utils.HelperMethods.isNumeric;
 
-public class AddProductController{
+public class AddNewProductController {
     @FXML public DatePicker expirationDatePicker;
     @FXML public TextField purchasedPriceTextField;
     @FXML public TextField soldPriceTextField;
@@ -46,7 +46,6 @@ public class AddProductController{
             pstm.setString(5, category);
             pstm.setString(6, expirationDate);
             pstm.execute();
-            c.close();
         }
         catch(SQLException e){
             e.printStackTrace();

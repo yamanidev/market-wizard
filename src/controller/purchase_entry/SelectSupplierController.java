@@ -18,29 +18,28 @@ import model.Supplier;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class SelectSupplierController implements Initializable {
-    @FXML public Button newBtn;
-    @FXML public Button cancelBtn;
-    @FXML public Button confirmBtn;
-    @FXML public TableView<Supplier> suppliersTableView;
-    @FXML public TableColumn<Supplier, String> supplierNameCol;
-    @FXML public TableColumn<Supplier, String> wilayaCol;
-    @FXML public TableColumn<Supplier, String> phoneNumberCol;
-    @FXML public TableColumn<Supplier, Integer> supplierIdCol;
+
+    @FXML private Button newSupplierBtn;
+    @FXML private Button cancelBtn;
+    @FXML private Button confirmBtn;
+    @FXML private TableView<Supplier> suppliersTableView;
+    @FXML private TableColumn<Supplier, String> supplierNameCol;
+    @FXML private TableColumn<Supplier, String> addressCol;
+    @FXML private TableColumn<Supplier, String> phoneNumberCol;
+    @FXML private TableColumn<Supplier, Integer> supplierIdCol;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         confirmBtn.disableProperty().bind(Bindings.isEmpty(suppliersTableView.getSelectionModel().getSelectedItems()));
-        supplierNameCol.setCellValueFactory(new PropertyValueFactory<>("SupplierName"));
+        supplierNameCol.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
         supplierIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("PhoneNumber"));
-        wilayaCol.setCellValueFactory(new PropertyValueFactory<>("Wilaya"));
+        phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         suppliersTableView.setItems(getSuppliers());
     }
 
@@ -50,20 +49,20 @@ public class SelectSupplierController implements Initializable {
 
     public ObservableList<Supplier> getSuppliers(){
         ObservableList<Supplier> list = FXCollections.observableArrayList();
-        Connection c = DBUtils.getConnection();
-        String sqlQuery = "select * from suppliers";
-        Statement st;
-        ResultSet rs;
-        try {
-            st = c.createStatement();
-            rs = st.executeQuery(sqlQuery);
+        String sqlQuery = "SELECT * FROM suppliers";
+
+        try (Connection c = DBUtils.getConnection()){
+            Statement st = c.createStatement();
+            ResultSet rs = st.executeQuery(sqlQuery);
             Supplier supplier;
 
             while(rs.next()){
                 supplier = new Supplier(rs.getInt("supplier_id"),
                         rs.getString("supplier_name"),
                         rs.getString("phone_number"),
-                        rs.getString("wilaya"));
+                        rs.getString("address"),
+                        rs.getString("nis"),
+                        rs.getString("nif"));
 
                 list.add(supplier);
             }
@@ -73,13 +72,12 @@ public class SelectSupplierController implements Initializable {
         return list;
     }
 
-    public void cancelOnClick(ActionEvent actionEvent) {
-        Stage window = (Stage) cancelBtn.getScene().getWindow();
-        window.close();
+    public void cancelOnClick(ActionEvent actionEvent) throws SQLException {
+        ((Stage) cancelBtn.getScene().getWindow()).close();
     }
 
     public void newSupplierOnClick(ActionEvent actionEvent) throws IOException {
-        Stage window = HelperMethods.openWindow("add-supplier.fxml",
+        Stage window = HelperMethods.openWindow("purchase_entry/add-supplier.fxml",
                 "Add New Supplier");
         window.setOnHidden((e) -> {
             updateSuppliers();
@@ -87,10 +85,9 @@ public class SelectSupplierController implements Initializable {
     }
 
 
-    public void confirmOnClick(ActionEvent actionEvent) {
+    public void confirmOnClick(ActionEvent actionEvent) throws SQLException {
         NameHolder.supplierName = suppliersTableView.
-                getSelectionModel().getSelectedItem().supplierName;
-        Stage window = (Stage) confirmBtn.getScene().getWindow();
-        window.close();
+                getSelectionModel().getSelectedItem().getSupplierName();
+        ((Stage) cancelBtn.getScene().getWindow()).close();
     }
 }

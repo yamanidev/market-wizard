@@ -23,15 +23,17 @@ public class AddInvoiceController {
     @FXML public Button confirmBtn;
     @FXML public Button cancelBtn;
     @FXML public Label selectedSupplierLabel;
-    final Connection c = DBUtils.getConnection();
+
 
     public void addInvoice(String supplier, String dateOfPurchase){
         String sqlQuery = "INSERT INTO invoices (supplier, date_of_purchase)" +
                 "VALUES (?, ?)";
-        try(PreparedStatement pstm = c.prepareStatement(sqlQuery)){
+        try(Connection c = DBUtils.getConnection();
+            PreparedStatement pstm = c.prepareStatement(sqlQuery)){
             pstm.setString(1, supplier);
             pstm.setString(2, dateOfPurchase);
             pstm.execute();
+            c.close();
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -39,24 +41,24 @@ public class AddInvoiceController {
         }
     }
 
-    public boolean validateFields(){
+    private boolean validateFields(){
         return dateOfPurchaseDatePicker.getValue() != null &&
                 !selectedSupplierLabel.getText().equals("Label");
     }
 
     public void selectOnClick(ActionEvent actionEvent) throws IOException {
-        Stage window = HelperMethods.openWindow("select-supplier.fxml",
+        Stage window = HelperMethods.openWindow("purchase_entry/select-supplier.fxml",
                 "Something");
         window.setOnHidden((e) ->{
             selectedSupplierLabel.setText(NameHolder.supplierName);
         });
     }
 
-    public void cancelOnClick(ActionEvent actionEvent) {
+    public void cancelOnClick(ActionEvent actionEvent){
         ((Stage) cancelBtn.getScene().getWindow()).close();
     }
 
-    public void confirmOnClick(ActionEvent actionEvent) {
+    public void confirmOnClick(ActionEvent actionEvent){
         if (validateFields()){
             addInvoice(selectedSupplierLabel.getText(),
                     dateOfPurchaseDatePicker.getValue().
@@ -64,7 +66,7 @@ public class AddInvoiceController {
             ((Stage) cancelBtn.getScene().getWindow()).close();
         }
         else{
-            HelperMethods.emptyFieldsAlert((Stage) cancelBtn.getScene().getWindow());
+            HelperMethods.invalidFieldsAlert((Stage) cancelBtn.getScene().getWindow());
         }
     }
 }

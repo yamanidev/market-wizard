@@ -2,16 +2,20 @@ package model;
 
 public class Supplier {
 
-    public int id;
-    public String supplierName;
-    public String phoneNumber;
-    public String wilaya;
+    private int id;
+    private String supplierName;
+    private String phoneNumber;
+    private String address;
+    private String nis;
+    private String nif;
 
-    public Supplier(int id, String supplierName, String phoneNumber, String wilaya) {
+    public Supplier(int id, String supplierName, String phoneNumber, String address, String nis, String nif) {
         this.id = id;
         this.supplierName = supplierName;
         this.phoneNumber = phoneNumber;
-        this.wilaya = wilaya;
+        this.address = address;
+        this.nis = nis;
+        this.nif = nif;
     }
 
     public int getId() {
@@ -38,11 +42,27 @@ public class Supplier {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getWilaya() {
-        return wilaya;
+    public String getAddress() {
+        return address;
     }
 
-    public void setWilaya(String wilaya) {
-        this.wilaya = wilaya;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getNis() {
+        return nis;
+    }
+
+    public void setNis(String nis) {
+        this.nis = nis;
+    }
+
+    public String getNif() {
+        return nif;
+    }
+
+    public void setNif(String nif) {
+        this.nif = nif;
     }
 }

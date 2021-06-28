@@ -30,10 +30,7 @@ public class SelectProductController implements Initializable {
     public TableColumn<Product, Double> soldPriceCol;
     public TableColumn<Product,Integer> quantityCol;
     public TableColumn<Product, String> categoryCol;
-    public TableColumn<Product, String> expirationDateCol;
     public TableColumn<Product, Integer> productIdCol;
-
-    final Connection c = DBUtils.getConnection();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,35 +42,16 @@ public class SelectProductController implements Initializable {
         soldPriceCol.setCellValueFactory(new PropertyValueFactory<>("soldPrice"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
-        expirationDateCol.setCellValueFactory(new PropertyValueFactory<>("expirationDate"));
         updateProducts();
-    }
-
-    public void addProductToInvoice(){
-        String sqlQuery = "INSERT INTO invoices_products (invoice_id," +
-                "product_id) VALUES (?, ?)";
-
-        try(PreparedStatement pstm = c.prepareStatement(sqlQuery)) {
-            pstm.setInt(1, NameHolder.invoiceId);
-            pstm.setInt(2, productsTableView.getSelectionModel().
-                    getSelectedItem().getId());
-            pstm.execute();
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
     }
 
     public ObservableList<Product> getProducts(){
         ObservableList<Product> list = FXCollections.observableArrayList();
-        Connection c = DBUtils.getConnection();
-        String sqlQuery = "select * from products";
-        Statement st;
-        ResultSet rs;
-        try {
-            st = c.createStatement();
-            rs = st.executeQuery(sqlQuery);
+        String sqlQuery = "SELECT * FROM products";
+
+        try (Connection c = DBUtils.getConnection()){
+            Statement st = c.createStatement();
+            ResultSet rs = st.executeQuery(sqlQuery);
             Product product;
 
             while(rs.next()){
@@ -94,7 +72,7 @@ public class SelectProductController implements Initializable {
     }
 
     public void newProductOnClick(ActionEvent actionEvent) throws IOException {
-        Stage window = HelperMethods.openWindow("add-product.fxml",
+        Stage window = HelperMethods.openWindow("purchase_entry/add-new-product.fxml",
                 "Add New Product");
         window.setOnHidden((e) -> {
             updateProducts();
@@ -111,7 +89,8 @@ public class SelectProductController implements Initializable {
     }
 
     public void confirmOnClick(ActionEvent actionEvent) {
-        addProductToInvoice();
+        NameHolder.productName = productsTableView.getSelectionModel().getSelectedItem().getName();
+        NameHolder.productId = productsTableView.getSelectionModel().getSelectedItem().getId();
         ((Stage) cancelBtn.getScene().getWindow()).close();
     }
 

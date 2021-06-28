@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="450.0" prefWidth="436.0" style="-fx-border-color: #23B883; -fx-background-radius: 0; -fx-border-radius: 0; -fx-border-width: 5.45989px;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.purchase_entry.AddInvoiceController">
+   <children>
+      <Label layoutX="146.0" layoutY="51.0" prefHeight="38.0" prefWidth="153.0" text="New Bill:" textFill="#0a6b49" AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="147.91977999999995" AnchorPane.topAnchor="51.0">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <Button fx:id="selectBtn" layoutX="105.0" layoutY="317.0" mnemonicParsing="false" onAction="#selectOnClick" prefHeight="37.0" prefWidth="235.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 10;" text="Select supplier" textFill="WHITE" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="confirmBtn" layoutX="110.0" layoutY="372.0" mnemonicParsing="false" onAction="#confirmOnClick" prefHeight="37.0" prefWidth="110.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 10;" text="Confirm" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="95.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <VBox alignment="CENTER" layoutX="67.0" layoutY="99.0" prefHeight="180.0" prefWidth="328.0" spacing="30.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="51.919779999999946" AnchorPane.topAnchor="99.0">
+         <children>
+            <HBox prefHeight="40.0" prefWidth="245.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="143.0" text="Supplier :" textFill="#0a6b49">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="selectedSupplierLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="179.0" text="Supplier's name" textFill="#616161">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <DatePicker fx:id="dateOfPurchaseDatePicker" prefHeight="40.0" prefWidth="245.0" promptText="Purchase Date" style="-fx-border-color: #23B883;" />
+         </children>
+      </VBox>
+      <Button fx:id="cancelBtn" layoutX="229.54011000000003" layoutY="367.0" mnemonicParsing="false" onAction="#cancelOnClick" prefHeight="37.0" prefWidth="110.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="95.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

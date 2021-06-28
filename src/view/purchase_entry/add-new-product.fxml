@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="525.0" prefWidth="436.0" style="-fx-border-color: #23B883; -fx-border-width: 5.5px;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.purchase_entry.AddNewProductController">
+   <children>
+      <Label layoutX="135.0" layoutY="30.0" text="New Product" textFill="#0a6b49" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutX="82.0" layoutY="93.0" prefHeight="400.0" prefWidth="300.0" spacing="20.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="93.0">
+         <children>
+            <TextField fx:id="productNameTextField" prefHeight="40.0" prefWidth="300.0" promptText="Product Name" style="-fx-background-color: #EBEBEB; -fx-border-color: #23B883;">
+               <font>
+                  <Font size="16.5" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="quantityTextField" prefHeight="40.0" prefWidth="300.0" promptText="Quantity" style="-fx-background-color: #EBEBEB; -fx-border-color: #23B883;">
+               <font>
+                  <Font size="16.5" />
+               </font>
+            </TextField>
+            <TextField fx:id="purchasedPriceTextField" layoutX="10.0" layoutY="28.0" prefHeight="40.0" prefWidth="300.0" promptText="Purchased Price" style="-fx-background-color: #EBEBEB; -fx-border-color: #23B883;">
+               <font>
+                  <Font size="16.5" />
+               </font>
+            </TextField>
+            <TextField fx:id="soldPriceTextField" prefHeight="40.0" prefWidth="300.0" promptText="Sold Price" style="-fx-background-color: #EBEBEB; -fx-border-color: #23B883;">
+               <font>
+                  <Font size="16.5" />
+               </font>
+            </TextField>
+            <TextField fx:id="categoryTextField" prefHeight="40.0" prefWidth="300.0" promptText="Category" style="-fx-background-color: #EBEBEB; -fx-border-color: #23B883;">
+               <font>
+                  <Font size="16.5" />
+               </font>
+            </TextField>
+            <DatePicker fx:id="expirationDatePicker" prefHeight="40.0" prefWidth="300.0" promptText="Expiration Date" style="-fx-border-color: #23B883;" />
+            <HBox prefHeight="37.0" prefWidth="275.0" spacing="40.0">
+               <children>
+                  <Button fx:id="confirmBtn" mnemonicParsing="false" onAction="#confirmOnClick" prefHeight="37.0" prefWidth="130.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 11px;" text="Confirm" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancelOnClick" prefHeight="37.0" prefWidth="130.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 11px;" text="Cancel" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
