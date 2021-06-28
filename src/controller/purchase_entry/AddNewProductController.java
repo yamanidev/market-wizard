@@ -5,19 +5,22 @@ import app.utils.DBUtils;
 import app.utils.HelperMethods;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
 import static app.utils.HelperMethods.isNumeric;
 
-public class AddProductController {
+public class AddProductController{
     @FXML public DatePicker expirationDatePicker;
     @FXML public TextField purchasedPriceTextField;
     @FXML public TextField soldPriceTextField;
@@ -26,16 +29,16 @@ public class AddProductController {
     @FXML public TextField productNameTextField;
     @FXML public Button confirmBtn;
     @FXML public Button cancelBtn;
-    final Connection c = DBUtils.getConnection();
 
 
     public void addProduct(String productName, double purchasedPrice,
                            double soldPrice, int quantity, String category,
                            String expirationDate){
-        String sqlQuery = "INSERT INTO products (name, purchased_price, sold_price," +
+        String sqlQuery = "INSERT INTO products (product_name, purchased_price, sold_price," +
                 "quantity, category, expiration_date)" +
                 "VALUES (?, ?, ?, ?, ?, ?)";
-        try(PreparedStatement pstm = c.prepareStatement(sqlQuery)){
+        try(Connection c = DBUtils.getConnection();
+            PreparedStatement pstm = c.prepareStatement(sqlQuery)){
             pstm.setString(1, productName);
             pstm.setDouble(2, purchasedPrice);
             pstm.setDouble(3, soldPrice);
@@ -43,6 +46,7 @@ public class AddProductController {
             pstm.setString(5, category);
             pstm.setString(6, expirationDate);
             pstm.execute();
+            c.close();
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -67,7 +71,7 @@ public class AddProductController {
     }
 
 
-    public void confirmOnClick(ActionEvent actionEvent) {
+    public void confirmOnClick(ActionEvent actionEvent){
         if (validateFields()){
             addProduct(productNameTextField.getText(),
                     Double.parseDouble(purchasedPriceTextField.getText()),
@@ -78,7 +82,7 @@ public class AddProductController {
             ((Stage) cancelBtn.getScene().getWindow()).close();
         }
         else {
-            HelperMethods.emptyFieldsAlert((Stage) cancelBtn.getScene().getWindow());
+            HelperMethods.invalidFieldsAlert((Stage) cancelBtn.getScene().getWindow());
         }
     }
 
