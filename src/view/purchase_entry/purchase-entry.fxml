@@ -140,7 +140,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button fx:id="endTransationBtn" alignment="CENTER" layoutX="1018.0" layoutY="561.0" mnemonicParsing="false" onAction="#endTransactionOnClick" prefHeight="36.0" prefWidth="200.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 20px;" text="End Transaction" textFill="WHITE">
+                  <Button fx:id="endTransationBtn" alignment="CENTER" disable="true" layoutX="1018.0" layoutY="561.0" mnemonicParsing="false" onAction="#endTransactionOnClick" prefHeight="36.0" prefWidth="200.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 20px;" text="End Transaction" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>

@@ -350,7 +350,7 @@ public class PurchaseEntryController implements Initializable {
     }
 
     public void stockOnClick(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/home/drakkath/IdeaProjects/MarketWizard/src/view/stock/stock.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../../view/stock/stock.fxml"));
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root,1280,679);
         window.setScene(scene);
