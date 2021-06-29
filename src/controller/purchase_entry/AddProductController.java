@@ -30,11 +30,12 @@ public class AddProductController {
     private boolean validateFields(){
         return quantityTextField.getText() != null && purchasedPriceTextField.getText() != null &&
                 soldPriceTextField.getText() != null && !quantityTextField.getText().trim().isEmpty() &&
-                !purchasedPriceTextField.getText().trim().isEmpty() && !soldPriceTextField.getText().trim().isEmpty();
+                !purchasedPriceTextField.getText().trim().isEmpty() && !soldPriceTextField.getText().trim().isEmpty()
+                && !(quantityTextField.getText().charAt(0) == '0');
     }
 
     private void updateProduct(int productId, int quantity, double purchasedPrice, double soldPrice){
-        String sqlQuery = "UPDATE products SET quantity = ?," +
+        String sqlQuery = "UPDATE products SET quantity = (quantity + ?)," +
                 "purchased_price = ?," +
                 "sold_price = ? " +
                 "WHERE product_id = " + productId;
@@ -51,36 +52,20 @@ public class AddProductController {
         }
     }
 
-    private void addProductToInvoice(int invoiceId, int productId){
+    private void addProductToInvoice(int invoiceId, int productId, int productQuantity){
         String sqlQuery = "INSERT INTO invoices_products (invoice_id," +
-                "product_id) VALUES (?, ?)";
+                "product_id, product_quantity) VALUES (?, ?, ?)";
 
         try(Connection c = DBUtils.getConnection();
             PreparedStatement pstm = c.prepareStatement(sqlQuery)) {
             pstm.setInt(1, invoiceId);
             pstm.setInt(2, productId);
+            pstm.setInt(3, productQuantity);
             pstm.execute();
         }
         catch(SQLException e){
             e.printStackTrace();
             System.out.println(e.getMessage());
-        }
-    }
-
-    @FXML void cancelOnClick(ActionEvent event) {
-        ((Stage) cancelBtn.getScene().getWindow()).close();
-    }
-
-    @FXML void confirmOnClick(ActionEvent event) {
-        if (validateFields()){
-            updateProduct(NameHolder.productId, Integer.parseInt(quantityTextField.getText()),
-                    Double.parseDouble(purchasedPriceTextField.getText()),
-                    Double.parseDouble(soldPriceTextField.getText()));
-            addProductToInvoice(NameHolder.invoiceId, NameHolder.productId);
-            ((Stage) cancelBtn.getScene().getWindow()).close();
-        }
-        else{
-            HelperMethods.invalidFieldsAlert((Stage) cancelBtn.getScene().getWindow());
         }
     }
 
@@ -106,6 +91,24 @@ public class AddProductController {
                 System.out.println(ex.getMessage());
             }
         });
+    }
+
+    @FXML void confirmOnClick(ActionEvent event) {
+        if (validateFields()){
+            updateProduct(NameHolder.productId, Integer.parseInt(quantityTextField.getText()),
+                    Double.parseDouble(purchasedPriceTextField.getText()),
+                    Double.parseDouble(soldPriceTextField.getText()));
+            addProductToInvoice(NameHolder.invoiceId, NameHolder.productId,
+                    Integer.parseInt(quantityTextField.getText()));
+            ((Stage) cancelBtn.getScene().getWindow()).close();
+        }
+        else{
+            HelperMethods.invalidFieldsAlert((Stage) cancelBtn.getScene().getWindow());
+        }
+    }
+
+    @FXML void cancelOnClick(ActionEvent event) {
+        ((Stage) cancelBtn.getScene().getWindow()).close();
     }
 
 }

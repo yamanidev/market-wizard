@@ -55,6 +55,7 @@ public class EditInvoiceController implements Initializable {
             pstm.execute();
         }
         catch (SQLException e){
+            e.printStackTrace();
             System.out.println(e.getMessage());
         }
     }

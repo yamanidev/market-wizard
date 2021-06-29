@@ -6,13 +6,14 @@ public class Product {
     String name;
     double purchasedPrice;
     double soldPrice;
+    double total = 0;
     String expirationDate;
     String category;
     int quantity;
 
     public Product(int id, String name, double purchasedPrice,
                    double soldPrice, String expirationDate,
-                   String category, int quantity) {
+                   String category, int quantity, double total) {
         this.id = id;
         this.name = name;
         this.purchasedPrice = purchasedPrice;
@@ -20,6 +21,15 @@ public class Product {
         this.expirationDate = expirationDate;
         this.category = category;
         this.quantity = quantity;
+        this.total = total;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     public int getId() {

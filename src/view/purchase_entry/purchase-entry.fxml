@@ -68,8 +68,8 @@
                           <Label />
                       </placeholder>
                     <columns>
-                        <TableColumn fx:id="invoiceIdCol" prefWidth="223.88888549804688" style="-fx-alignment: CENTER;" text="ID" />
-                      <TableColumn fx:id="dateOfPurchaseCol" prefWidth="280.7777099609375" style="-fx-alignment: CENTER;" text="Date of Purchase" />
+                        <TableColumn fx:id="invoiceIdCol" prefWidth="193.0" style="-fx-alignment: CENTER;" text="ID" />
+                      <TableColumn fx:id="dateOfPurchaseCol" prefWidth="312.0" style="-fx-alignment: CENTER;" text="Date of Purchase" />
                         <TableColumn fx:id="supplierCol" minWidth="0.0" prefWidth="441.0" style="-fx-alignment: CENTER;" text="Supplier" />
                     </columns>
                   </TableView>
@@ -78,11 +78,12 @@
                           <Label />
                       </placeholder>
                      <columns>
-                        <TableColumn fx:id="productIdCol" minWidth="0.0" prefWidth="161.0" style="-fx-border-right-color: #23B883;" text="ID" />
-                        <TableColumn fx:id="productCol" prefWidth="236.333251953125" text="Product" />
-                        <TableColumn fx:id="categoryCol" prefWidth="175.6666259765625" text="Category" />
-                        <TableColumn fx:id="quantityCol" minWidth="0.0" prefWidth="138.3333740234375" text="Quantity" />
-                        <TableColumn fx:id="priceOfUnitCol" prefWidth="231.6666259765625" text="Price of Unit" />
+                        <TableColumn fx:id="productIdCol" minWidth="0.0" prefWidth="66.0" style="-fx-border-right-color: #23B883;" text="ID" />
+                        <TableColumn fx:id="productCol" prefWidth="226.0" text="Product" />
+                        <TableColumn fx:id="categoryCol" prefWidth="168.0" text="Category" />
+                        <TableColumn fx:id="quantityCol" minWidth="0.0" prefWidth="152.0" text="Quantity" />
+                        <TableColumn fx:id="priceOfUnitCol" prefWidth="166.0" text="Price of Unit" />
+                        <TableColumn fx:id="totalCol" prefWidth="168.0" text="Total" />
                      </columns>
                   </TableView>
                   <VBox layoutX="1030.0" layoutY="326.0" maxHeight="182.0" prefHeight="182.0" prefWidth="175.0" spacing="37.0" AnchorPane.bottomAnchor="117.0" AnchorPane.leftAnchor="1030.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="326.0">
@@ -132,13 +133,24 @@
                               <Font size="19.0" />
                            </font>
                         </Label>
-                          <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" prefHeight="34.0" prefWidth="233.0" style="-fx-border-color: #23B883; -fx-border-left-color: transparent; -fx-border-width: 0px 1px 1px 0px;" textAlignment="CENTER">
+                          <Label fx:id="totalPriceLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" prefHeight="34.0" prefWidth="233.0" style="-fx-border-color: #23B883; -fx-border-left-color: transparent; -fx-border-width: 0px 1px 1px 0px;" text="00.00" textAlignment="CENTER">
                            <font>
                               <Font size="19.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
+                  <Button fx:id="endTransationBtn" alignment="CENTER" layoutX="1018.0" layoutY="561.0" mnemonicParsing="false" onAction="#endTransactionOnClick" prefHeight="36.0" prefWidth="200.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 20px;" text="End Transaction" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="1.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children>
                <BorderPane.margin>
                   <Insets left="-255.0" />

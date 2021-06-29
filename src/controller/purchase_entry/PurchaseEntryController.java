@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,52 +35,56 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class PurchaseEntryController implements Initializable {
-    @FXML public Button addInvoiceBtn;
-    @FXML public Button editInvoiceBtn;
-    @FXML public Button deleteInvoiceBtn;
-    @FXML public Button addProductBtn;
-    @FXML public Button editProductBtn;
-    @FXML public Button deleteProductBtn;
+    @FXML private Button endTransationBtn;
+    @FXML private Button addInvoiceBtn;
+    @FXML private Button editInvoiceBtn;
+    @FXML private Button deleteInvoiceBtn;
+    @FXML private Button addProductBtn;
+    @FXML private Button editProductBtn;
+    @FXML private Button deleteProductBtn;
+    @FXML private Label totalPriceLabel;
 
-    @FXML public TableView<Invoice> invoicesTableView;
-    @FXML public TableColumn<Invoice, Integer> invoiceIdCol;
-    @FXML public TableColumn<Invoice, String> dateOfPurchaseCol;
-    @FXML public TableColumn<Invoice, String> supplierCol;
+    @FXML private TableView<Invoice> invoicesTableView;
+    @FXML private TableColumn<Invoice, Integer> invoiceIdCol;
+    @FXML private TableColumn<Invoice, String> dateOfPurchaseCol;
+    @FXML private TableColumn<Invoice, String> supplierCol;
 
-    @FXML public TableView<Product> productsTableView;
-    @FXML public TableColumn<Product, Integer> productIdCol;
-    @FXML public TableColumn<Product, String> productCol;
-    @FXML public TableColumn<Product, Double> priceOfUnitCol;
-    @FXML public TableColumn<Product, Integer> quantityCol;
-    @FXML public TableColumn<Product, String> categoryCol;
+    @FXML private TableView<Product> productsTableView;
+    @FXML private TableColumn<Product, Integer> productIdCol;
+    @FXML private TableColumn<Product, String> productCol;
+    @FXML private TableColumn<Product, Double> priceOfUnitCol;
+    @FXML private TableColumn<Product, Integer> quantityCol;
+    @FXML private TableColumn<Product, String> categoryCol;
+    @FXML private TableColumn<Product, Double> totalCol;
 
     // Top nav
-    @FXML public Button dashboardBtn;
-    @FXML public Button sellingBtn;
-    @FXML public Button stockBtn;
-    @FXML public Button suppliersBtn;
-    @FXML public Button customersBtn;
+    @FXML private Button dashboardBtn;
+    @FXML private Button sellingBtn;
+    @FXML private Button stockBtn;
+    @FXML private Button suppliersBtn;
+    @FXML private Button customersBtn;
 
     // Slider
-    @FXML public Circle imageCircle ;
-    @FXML public Pane openSliderPane;
-    @FXML public Pane closeSliderPane;
-    @FXML public ImageView openSliderImage;
-    @FXML public AnchorPane slider;
-    @FXML public AnchorPane x;
+    @FXML private Circle imageCircle ;
+    @FXML private Pane openSliderPane;
+    @FXML private Pane closeSliderPane;
+    @FXML private ImageView openSliderImage;
+    @FXML private AnchorPane slider;
+    @FXML private AnchorPane x;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        invoiceIdCol.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        dateOfPurchaseCol.setCellValueFactory(new PropertyValueFactory<>("DateOfPurchase"));
-        supplierCol.setCellValueFactory(new PropertyValueFactory<>("Supplier"));
+        invoiceIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        dateOfPurchaseCol.setCellValueFactory(new PropertyValueFactory<>("dateOfPurchase"));
+        supplierCol.setCellValueFactory(new PropertyValueFactory<>("supplier"));
         invoicesTableView.setItems(getInvoices());
 
-        productIdCol.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        productCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        priceOfUnitCol.setCellValueFactory(new PropertyValueFactory<>("PurchasedPrice"));
-        quantityCol.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
-        categoryCol.setCellValueFactory(new PropertyValueFactory<>("Category"));
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        priceOfUnitCol.setCellValueFactory(new PropertyValueFactory<>("purchasedPrice"));
+        quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        totalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
 
         editInvoiceBtn.disableProperty().bind(Bindings.isEmpty(invoicesTableView
                 .getSelectionModel().getSelectedItems()));
@@ -93,13 +98,12 @@ public class PurchaseEntryController implements Initializable {
         deleteProductBtn.disableProperty().bind(Bindings.isEmpty(productsTableView
                 .getSelectionModel().getSelectedItems()));
 
-
         invoicesTableView.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldValue, newValue) ->{
                     updateProducts();
+                    endTransationBtn.disableProperty().bind(Bindings.isEmpty(productsTableView.getItems()));
                 }
         );
-
 
         slider.setTranslateX(-255);
         openSliderPane.setVisible(true);
@@ -159,6 +163,14 @@ public class PurchaseEntryController implements Initializable {
 
     }
 
+    private double getTotal(){
+        double total = 0;
+        for (Product product : productsTableView.getItems()){
+            total += product.getPurchasedPrice() * product.getQuantity();
+        }
+        return total;
+    }
+
     private ObservableList<Invoice> getInvoices() {
         ObservableList<Invoice> list = FXCollections.observableArrayList();
         String sqlQuery = "SELECT * FROM invoices";
@@ -183,19 +195,27 @@ public class PurchaseEntryController implements Initializable {
 
     private ObservableList<Product> getProducts(int invoiceId){
         ObservableList<Product> list = FXCollections.observableArrayList();
-        String sqlQuery = "select products.product_id, products.product_name," +
-                "products.purchased_price, products.expiration_date," +
-                "products.sold_price, products.quantity," +
-                "products.category from products\n" +
-                "join invoices_products on" +
-                "(products.product_id = invoices_products.product_id)\n" +
-                "join invoices on" +
-                "(invoices.invoice_id = invoices_products.invoice_id)\n" +
-                "where invoices.invoice_id = " + invoiceId;
+//        String sqlQuery = "SELECT products.product_id, products.product_name," +
+//                "products.purchased_price, products.expiration_date," +
+//                "products.sold_price, products.quantity," +
+//                "products.category FROM products\n" +
+//                "JOIN invoices_products ON" +
+//                "(products.product_id = invoices_products.product_id)\n" +
+//                "JOIN invoices ON" +
+//                "(invoices.invoice_id = invoices_products.invoice_id)\n" +
+//                "WHERE invoices.invoice_id = " + invoiceId;
+
+        String sqlQuery = "SELECT\n" +
+                "products.product_id, products.product_name, \n" +
+                "invoices_products.product_quantity, products.purchased_price,\n" +
+                "products.sold_price, products.category, \n" +
+                "products.expiration_date\n" +
+                "FROM products JOIN invoices_products ON (products.product_id = invoices_products.product_id)\n" +
+                "JOIN invoices ON (invoices.invoice_id = invoices_products.invoice_id)\n" +
+                "WHERE invoices.invoice_id = " + invoiceId;
 
         Product product;
-        try (Connection c = DBUtils.getConnection();
-             PreparedStatement pstm = c.prepareStatement(sqlQuery)){
+        try (Connection c = DBUtils.getConnection()){
 
             Statement st = c.createStatement();
             ResultSet rs = st.executeQuery(sqlQuery);
@@ -206,7 +226,8 @@ public class PurchaseEntryController implements Initializable {
                         rs.getDouble("sold_price"),
                         rs.getString("expiration_date"),
                         rs.getString("category"),
-                        rs.getInt("quantity"));
+                        rs.getInt("product_quantity"),
+                        rs.getInt("product_quantity") * rs.getDouble("purchased_price"));
                 list.add(product);
             }
         }
@@ -216,11 +237,11 @@ public class PurchaseEntryController implements Initializable {
         return list;
     }
 
-    public void updateInvoices(){
+    private void updateInvoices(){
         invoicesTableView.setItems(getInvoices());
     }
 
-    public void updateProducts(){
+    private void updateProducts() {
         if (invoicesTableView.getSelectionModel().getSelectedItem() != null)
             productsTableView.setItems(getProducts(
                 invoicesTableView.getSelectionModel().getSelectedItem().getId()
@@ -228,6 +249,7 @@ public class PurchaseEntryController implements Initializable {
         else {
             productsTableView.getItems().clear();
         }
+        totalPriceLabel.setText(String.format("%.2f", getTotal()));
     }
 
     public void addInvoiceOnClick(ActionEvent actionEvent) throws IOException {
@@ -273,6 +295,7 @@ public class PurchaseEntryController implements Initializable {
 
     public void editProductOnClick(ActionEvent actionEvent) throws IOException {
         NameHolder.productId = productsTableView.getSelectionModel().getSelectedItem().getId();
+        NameHolder.invoiceId = invoicesTableView.getSelectionModel().getSelectedItem().getId();
         Stage window = HelperMethods.openWindow("purchase_entry/edit-product.fxml",
                 "Edit Product");
         window.setOnHidden((e) -> {
@@ -292,6 +315,19 @@ public class PurchaseEntryController implements Initializable {
             st.executeUpdate(sqlQuery);
         }
         catch (SQLException e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+
+        sqlQuery = "UPDATE products SET quantity = (quantity - " +
+        productsTableView.getSelectionModel().getSelectedItem().getQuantity() + ")" +
+                "WHERE product_id = " + productsTableView.getSelectionModel().getSelectedItem().getId();
+        try(Connection c = DBUtils.getConnection()){
+            Statement st = c.createStatement();
+            st.executeUpdate(sqlQuery);
+        }
+        catch (SQLException e){
+            e.printStackTrace();
             System.out.println(e.getMessage());
         }
         updateProducts();
@@ -335,5 +371,20 @@ public class PurchaseEntryController implements Initializable {
         Scene scene = new Scene(root,1280,679);
         window.setScene(scene);
         window.show();
+    }
+
+    public void endTransactionOnClick(ActionEvent actionEvent) {
+        String sqlQuery = "UPDATE invoices SET total_sum = ? WHERE invoice_id = " +
+                invoicesTableView.getSelectionModel().getSelectedItem().getId();
+        try(Connection c = DBUtils.getConnection();
+            PreparedStatement pstm = c.prepareStatement(sqlQuery)){
+            pstm.setDouble(1, Double.parseDouble(totalPriceLabel.getText()));
+            pstm.execute();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        invoicesTableView.getSelectionModel().clearSelection();
     }
 }

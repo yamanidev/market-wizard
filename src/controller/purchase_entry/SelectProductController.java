@@ -61,7 +61,8 @@ public class SelectProductController implements Initializable {
                         rs.getDouble("sold_price"),
                         rs.getString("expiration_date"),
                         rs.getString("category"),
-                        rs.getInt("quantity"));
+                        rs.getInt("quantity"),
+                        rs.getInt("quantity") * rs.getDouble("purchased_price"));
 
                 list.add(product);
             }
