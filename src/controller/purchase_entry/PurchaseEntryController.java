@@ -249,7 +249,7 @@ public class PurchaseEntryController implements Initializable {
         else {
             productsTableView.getItems().clear();
         }
-        totalPriceLabel.setText(String.format("%.2f", getTotal()));
+        totalPriceLabel.setText(String.format("%.2f", getTotal()).replace(",", "."));
     }
 
     public void addInvoiceOnClick(ActionEvent actionEvent) throws IOException {

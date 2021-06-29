@@ -25,7 +25,6 @@ public class Main extends Application {
                 Platform.runLater(root::requestFocus);
             }
         });
-//ilejhojdilj test
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -33,7 +32,6 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        System.out.println("eklhfcaldk ");
         launch(args);
     }
 }
