@@ -199,7 +199,12 @@ public class SellingEntryController implements Initializable {
 
     private void updateProducts(){
         productsTableView.setItems(getProducts(NameHolder.billId));
-        totalPriceLabel.setText(String.format("%.2f", getTotal()).replace(",", "."));
+        if (getTotal() == 0){
+            totalPriceLabel.setText("000000.00");
+        }
+        else {
+            totalPriceLabel.setText(String.format("%.2f", getTotal()).replace(",", "."));
+        }
     }
 
     public void dashboardOnClick(ActionEvent actionEvent) throws IOException {
@@ -259,13 +264,53 @@ public class SellingEntryController implements Initializable {
         });
     }
 
-    public void editOnClick(ActionEvent actionEvent) {
+    public void editOnClick(ActionEvent actionEvent) throws IOException {
+        NameHolder.productId = productsTableView.getSelectionModel().getSelectedItem().getId();
+        Stage window = HelperMethods.openWindow("selling_entry/edit-product.fxml",
+                "Edit Product");
+        window.setOnHidden((e) -> {
+            productsTableView.getSelectionModel().clearSelection();
+            updateProducts();
+        });
     }
 
     public void deleteOnClick(ActionEvent actionEvent) {
+        String sqlQuery = "DELETE FROM bills_products WHERE " +
+                "bill_id = " +
+                NameHolder.billId +
+                " AND product_id = " +
+                productsTableView.getSelectionModel().getSelectedItem().getId();
+        try(Connection c = DBUtils.getConnection()){
+            Statement st = c.createStatement();
+            st.executeUpdate(sqlQuery);
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+
+        sqlQuery = "UPDATE products SET quantity = (quantity + " +
+                productsTableView.getSelectionModel().getSelectedItem().getQuantity() + ")" +
+                "WHERE product_id = " + productsTableView.getSelectionModel().getSelectedItem().getId();
+        try(Connection c = DBUtils.getConnection()){
+            Statement st = c.createStatement();
+            st.executeUpdate(sqlQuery);
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        updateProducts();
     }
 
-    public void endTransactionOnClick(ActionEvent actionEvent) {
+    public void endTransactionOnClick(ActionEvent actionEvent) throws IOException {
+        NameHolder.totalAmount = Double.parseDouble(totalPriceLabel.getText());
+        Stage window = HelperMethods.openWindow("selling_entry/end-transaction.fxml",
+                    "End Transaction");
+        selectedCustomerLabel.setText("None");
+        NameHolder.customerId = 0;
+        productsTableView.getItems().clear();
+        totalPriceLabel.setText("000000.00");
     }
 
     public void selectCustomerOnClick(ActionEvent actionEvent) throws IOException {

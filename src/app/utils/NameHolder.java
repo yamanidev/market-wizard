@@ -9,4 +9,5 @@ public class NameHolder {
     public static int productId;
     public static int customerId;
     public static int billId;
+    public static double totalAmount;
 }

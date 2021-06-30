@@ -7,6 +7,8 @@ public class Supplier {
     private String phoneNumber;
     private String address;
     private String registry;
+    private String nis;
+    private String nif;
 
     public Supplier(int id, String supplierName,
                     String phoneNumber, String address,
@@ -28,9 +30,6 @@ public class Supplier {
     public void setRegistry(String registry) {
         this.registry = registry;
     }
-
-    private String nis;
-    private String nif;
 
     public Supplier(int id, String supplierName, String phoneNumber, String address, String nis, String nif) {
         this.id = id;
