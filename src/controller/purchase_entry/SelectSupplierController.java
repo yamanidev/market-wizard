@@ -47,12 +47,12 @@ public class SelectSupplierController implements Initializable {
         suppliersTableView.setItems(getSuppliers());
     }
 
-    public ObservableList<Supplier> getSuppliers(){
+    private ObservableList<Supplier> getSuppliers(){
         ObservableList<Supplier> list = FXCollections.observableArrayList();
         String sqlQuery = "SELECT * FROM suppliers";
 
-        try (Connection c = DBUtils.getConnection()){
-            Statement st = c.createStatement();
+        try (Connection c = DBUtils.getConnection();
+             Statement st = c.createStatement()){
             ResultSet rs = st.executeQuery(sqlQuery);
             Supplier supplier;
 
@@ -67,7 +67,7 @@ public class SelectSupplierController implements Initializable {
                 list.add(supplier);
             }
         }catch (Exception ex){
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
         return list;
     }

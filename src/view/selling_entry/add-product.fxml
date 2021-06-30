@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="450.0" prefWidth="436.0" style="-fx-border-color: #23B883; -fx-border-width: 5.5px;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.selling_entry.AddProductController">
+   <children>
+      <Label alignment="CENTER" layoutX="124.0" layoutY="36.0" prefHeight="31.0" prefWidth="209.0" text="Add Product" textFill="#0a6b49" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="115.0" AnchorPane.topAnchor="36.0">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutX="91.5" layoutY="100.5" prefHeight="196.0" prefWidth="273.0" spacing="20.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="95.0">
+         <children>
+            <HBox prefHeight="40.0" prefWidth="245.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="119.0" text="Product:" textFill="#0a6b49">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="selectedProductLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="181.0" text="Product's name" textFill="#616161">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <TextField fx:id="quantityTextField" layoutX="10.0" layoutY="28.0" prefHeight="40.0" prefWidth="300.0" promptText="Quantity" style="-fx-background-color: #EBEBEB; -fx-border-color: #23B883;">
+               <font>
+                  <Font size="16.5" />
+               </font>
+            </TextField>
+         </children>
+      </VBox>
+      <Button fx:id="selectBtn" layoutX="109.0" layoutY="297.0" mnemonicParsing="false" onAction="#selectOnClick" prefHeight="37.0" prefWidth="235.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 10;" text="Select product" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="confirmBtn" layoutX="109.0" layoutY="349.0" mnemonicParsing="false" onAction="#confirmOnClick" prefHeight="37.0" prefWidth="110.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 10;" text="Confirm" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="cancelBtn" layoutX="234.0" layoutY="349.0" mnemonicParsing="false" onAction="#cancelOnClick" prefHeight="37.0" prefWidth="110.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 10;" text="Cancel" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

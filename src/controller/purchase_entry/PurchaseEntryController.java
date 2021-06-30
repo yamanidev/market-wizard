@@ -27,7 +27,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Invoice;
 import model.Product;
-import model.Supplier;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,8 +34,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class PurchaseEntryController implements Initializable {
-    @FXML private Button endTransationBtn;
-    @FXML private Button addInvoiceBtn;
+    @FXML private Button endTransactionBtn;
     @FXML private Button editInvoiceBtn;
     @FXML private Button deleteInvoiceBtn;
     @FXML private Button addProductBtn;
@@ -57,15 +55,7 @@ public class PurchaseEntryController implements Initializable {
     @FXML private TableColumn<Product, String> categoryCol;
     @FXML private TableColumn<Product, Double> totalCol;
 
-    // Top nav
-    @FXML private Button dashboardBtn;
-    @FXML private Button sellingBtn;
-    @FXML private Button stockBtn;
-    @FXML private Button suppliersBtn;
-    @FXML private Button customersBtn;
-
-    // Slider
-    @FXML private Circle imageCircle ;
+    @FXML private Circle imageCircle;
     @FXML private Pane openSliderPane;
     @FXML private Pane closeSliderPane;
     @FXML private ImageView openSliderImage;
@@ -101,7 +91,7 @@ public class PurchaseEntryController implements Initializable {
         invoicesTableView.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldValue, newValue) ->{
                     updateProducts();
-                    endTransationBtn.disableProperty().bind(Bindings.isEmpty(productsTableView.getItems()));
+                    endTransactionBtn.disableProperty().bind(Bindings.isEmpty(productsTableView.getItems()));
                 }
         );
 
@@ -166,7 +156,7 @@ public class PurchaseEntryController implements Initializable {
     private double getTotal(){
         double total = 0;
         for (Product product : productsTableView.getItems()){
-            total += product.getPurchasedPrice() * product.getQuantity();
+            total += product.getTotal();
         }
         return total;
     }
@@ -195,15 +185,6 @@ public class PurchaseEntryController implements Initializable {
 
     private ObservableList<Product> getProducts(int invoiceId){
         ObservableList<Product> list = FXCollections.observableArrayList();
-//        String sqlQuery = "SELECT products.product_id, products.product_name," +
-//                "products.purchased_price, products.expiration_date," +
-//                "products.sold_price, products.quantity," +
-//                "products.category FROM products\n" +
-//                "JOIN invoices_products ON" +
-//                "(products.product_id = invoices_products.product_id)\n" +
-//                "JOIN invoices ON" +
-//                "(invoices.invoice_id = invoices_products.invoice_id)\n" +
-//                "WHERE invoices.invoice_id = " + invoiceId;
 
         String sqlQuery = "SELECT\n" +
                 "products.product_id, products.product_name, \n" +
@@ -233,6 +214,7 @@ public class PurchaseEntryController implements Initializable {
         }
         catch (Exception ex){
             ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
         return list;
     }
@@ -334,15 +316,15 @@ public class PurchaseEntryController implements Initializable {
     }
 
     public void dashboardOnClick(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/home/drakkath/IdeaProjects/MarketWizard/src/view/dashboard/dashboard.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../../view/dashboard/dashboard.fxml"));
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root,1280,679);
         window.setScene(scene);
         window.show();
     }
 
-    public void sellingOnClick(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/home/drakkath/IdeaProjects/MarketWizard/src/view/selling_entry/selling_entry.fxml"));
+    public void sellingEntryOnClick(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("../../view/selling_entry/selling-entry.fxml"));
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root,1280,679);
         window.setScene(scene);
@@ -358,7 +340,7 @@ public class PurchaseEntryController implements Initializable {
     }
 
     public void customersOnClick(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/home/drakkath/IdeaProjects/MarketWizard/src/view/customers/customers.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../../view/customers/customers.fxml"));
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root,1280,679);
         window.setScene(scene);
@@ -366,7 +348,7 @@ public class PurchaseEntryController implements Initializable {
     }
 
     public void suppliersOnClick(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/home/drakkath/IdeaProjects/MarketWizard/src/view/suppliers/suppliers.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../../view/suppliers/suppliers.fxml"));
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root,1280,679);
         window.setScene(scene);

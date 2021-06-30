@@ -6,6 +6,29 @@ public class Supplier {
     private String supplierName;
     private String phoneNumber;
     private String address;
+    private String registry;
+
+    public Supplier(int id, String supplierName,
+                    String phoneNumber, String address,
+                    String registry, String nis,
+                    String nif) {
+        this.id = id;
+        this.supplierName = supplierName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.registry = registry;
+        this.nis = nis;
+        this.nif = nif;
+    }
+
+    public String getRegistry() {
+        return registry;
+    }
+
+    public void setRegistry(String registry) {
+        this.registry = registry;
+    }
+
     private String nis;
     private String nif;
 

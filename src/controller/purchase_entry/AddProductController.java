@@ -17,14 +17,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class AddProductController {
-
     @FXML private Label selectedProductLabel;
     @FXML private TextField quantityTextField;
     @FXML private TextField purchasedPriceTextField;
     @FXML private TextField soldPriceTextField;
     @FXML private DatePicker expirationDatePicker;
-    @FXML private Button selectBtn;
-    @FXML private Button confirmBtn;
     @FXML private Button cancelBtn;
 
     private boolean validateFields(){
@@ -72,23 +69,29 @@ public class AddProductController {
     @FXML void selectOnClick(ActionEvent event) throws IOException {
         Stage window = HelperMethods.openWindow("purchase_entry/select-product.fxml",
                 "Select product");
+        NameHolder.productName = "Product's name";
         window.setOnHidden((e) ->{
-            selectedProductLabel.setText(NameHolder.productName);
-
-            String sqlQuery = "SELECT * FROM products WHERE product_id = " + NameHolder.productId;
-            try(Connection c = DBUtils.getConnection()) {
-                Statement st = c.createStatement();
-                ResultSet rs = st.executeQuery(sqlQuery);
+            if (!NameHolder.productName.equals("Product's name")){
+                selectedProductLabel.setText(NameHolder.productName);
                 quantityTextField.setText("0");
-                purchasedPriceTextField.setText(String.valueOf(rs.getDouble("purchased_price")));
-                soldPriceTextField.setText(String.valueOf(rs.getDouble("sold_price")));
-                DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                expirationDatePicker.setValue(
-                        LocalDate.parse(rs.getString("expiration_date"), df));
-            }
-            catch (SQLException ex){
-                ex.printStackTrace();
-                System.out.println(ex.getMessage());
+                quantityTextField.requestFocus();
+
+                String sqlQuery = "SELECT purchased_price, sold_price, expiration_date" +
+                        " FROM products WHERE product_id = " + NameHolder.productId;
+                try(Connection c = DBUtils.getConnection()) {
+                    Statement st = c.createStatement();
+                    ResultSet rs = st.executeQuery(sqlQuery);
+
+                    purchasedPriceTextField.setText(String.valueOf(rs.getDouble("purchased_price")));
+                    soldPriceTextField.setText(String.valueOf(rs.getDouble("sold_price")));
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    expirationDatePicker.setValue(
+                            LocalDate.parse(rs.getString("expiration_date"), df));
+                }
+                catch (SQLException ex){
+                    ex.printStackTrace();
+                    System.out.println(ex.getMessage());
+                }
             }
         });
     }

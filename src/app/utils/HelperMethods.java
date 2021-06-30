@@ -42,12 +42,12 @@ public class HelperMethods {
     }
 
     public static void invalidFieldsAlert(Stage window){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(String.valueOf("Please enter valid input"));
-        alert.setTitle("Invalid Input Error");
-        alert.setHeaderText("Invalid or missing input!");
-        alert.initOwner(window);
-        alert.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText(String.valueOf("Please enter valid input"));
+            alert.setTitle("Invalid Input Error");
+            alert.setHeaderText("Invalid or missing input!");
+            alert.initOwner(window);
+            alert.showAndWait();
     }
 
     public static boolean isNumeric(String s){

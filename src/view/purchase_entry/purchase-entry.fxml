@@ -140,7 +140,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button fx:id="endTransationBtn" alignment="CENTER" disable="true" layoutX="1018.0" layoutY="561.0" mnemonicParsing="false" onAction="#endTransactionOnClick" prefHeight="36.0" prefWidth="200.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 20px;" text="End Transaction" textFill="WHITE">
+                  <Button fx:id="endTransactionBtn" alignment="CENTER" disable="true" layoutX="1018.0" layoutY="561.0" mnemonicParsing="false" onAction="#endTransactionOnClick" prefHeight="36.0" prefWidth="200.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 20px;" text="End Transaction" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -176,7 +176,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="sellingBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="31.0" minHeight="30.0" minWidth="0.0" mnemonicParsing="false" onAction="#sellingOnClick" prefHeight="40.0" prefWidth="160.0" style="-fx-background-radius: 42.5px;" text="Selling entry" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="sellingBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="31.0" minHeight="30.0" minWidth="0.0" mnemonicParsing="false" onAction="#sellingEntryOnClick" prefHeight="40.0" prefWidth="160.0" style="-fx-background-radius: 42.5px;" text="Selling entry" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -257,10 +257,15 @@
                </BorderPane.margin></AnchorPane>
          </top>
          <left>
-            <AnchorPane fx:id="slider" maxHeight="625.0" maxWidth="295.0" prefHeight="625.0" prefWidth="295.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 0px 0px 100px 0px;" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="slider" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="655.0" prefWidth="295.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 0px 0px 100px 0px;" BorderPane.alignment="BOTTOM_LEFT">
                <children>
                   <VBox layoutX="-2.0" layoutY="3.0" maxHeight="264.0" maxWidth="295.0" minHeight="200.0" prefHeight="264.0" prefWidth="295.0" AnchorPane.bottomAnchor="361.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
+                        <Pane prefHeight="24.0" prefWidth="295.0" style="-fx-background-color: #23b883;">
+                           <VBox.margin>
+                              <Insets top="-24.0" />
+                           </VBox.margin>
+                        </Pane>
                         <Circle fx:id="imageCircle" fill="DODGERBLUE" radius="69.0" stroke="WHITE" strokeType="INSIDE" style="-fx-fill: white;">
                            <VBox.margin>
                               <Insets bottom="16.0" left="79.0" top="38.0" />
@@ -268,10 +273,10 @@
                         </Circle>
                         <Label alignment="CENTER" contentDisplay="CENTER" minHeight="42.0" minWidth="206.0" prefHeight="42.0" prefWidth="206.0" text="Shop name" textAlignment="CENTER" textFill="WHITE">
                            <font>
-                              <Font size="22.0" />
+                              <Font size="24.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="44.0" top="16.0" />
+                              <Insets left="44.0" right="44.0" top="16.0" />
                            </VBox.margin>
                         </Label>
                      </children>
@@ -287,7 +292,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Pane fx:id="openSliderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="625.0" prefHeight="625.0" prefWidth="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Pane fx:id="openSliderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="625.0" prefHeight="656.0" prefWidth="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <ImageView fitHeight="21.0" fitWidth="21.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" rotate="180.0" x="10.0" y="305.0">
                            <image>
@@ -301,27 +306,63 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Pane>
-                  <Pane fx:id="closeSliderPane" layoutX="265.0" layoutY="10.0" maxHeight="625.0" maxWidth="40.0" minHeight="625.0" prefHeight="625.0" prefWidth="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Pane fx:id="closeSliderPane" layoutX="265.0" layoutY="10.0" maxHeight="625.0" maxWidth="40.0" minHeight="625.0" prefHeight="656.0" prefWidth="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <ImageView fitHeight="21.0" fitWidth="21.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="10.0" y="305.0">
+                           <image>
+                              <Image url="@../../resources/img/Polygon.png" />
+                           </image>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <viewport>
                               <Rectangle2D />
                            </viewport>
-                           <image>
-                              <Image url="@../../resources/img/Polygon.png" />
-                           </image>
                         </ImageView>
                      </children>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
+                  <VBox layoutX="67.0" layoutY="285.0" prefHeight="250.0" prefWidth="168.0" spacing="20.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="288.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="168.0" style="-fx-background-color: #0A6B49; -fx-text-fill: white; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" text="Credits">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="168.0" style="-fx-background-color: #0A6B49; -fx-text-fill: white; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" text="Users">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="168.0" style="-fx-background-color: #0A6B49; -fx-text-fill: white; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" text="Log out">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="168.0" style="-fx-background-color: #0A6B49; -fx-text-fill: white; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" text="Exit">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </VBox>
                </children>
                <BorderPane.margin>
-                  <Insets />
+                  <Insets top="-30.0" />
                </BorderPane.margin>
             </AnchorPane>
          </left>

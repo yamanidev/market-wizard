@@ -9,20 +9,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" style="-fx-border-color: #23B883; -fx-border-width: 6px;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.purchase_entry.SelectSupplierController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" style="-fx-border-color: #23B883; -fx-border-width: 6px;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.selling_entry.SelectCustomerController">
    <children>
-      <TableView fx:id="suppliersTableView" layoutX="47.0" layoutY="167.0" prefHeight="270.0" prefWidth="718.0" style="-fx-border-color: #23B883; -fx-table-cell-border-color: #23B883;" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="155.0">
+      <TableView fx:id="customersTableView" layoutX="47.0" layoutY="167.0" prefHeight="270.0" prefWidth="718.0" style="-fx-border-color: #23B883; -fx-table-cell-border-color: #23B883;" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="155.0">
          <placeholder>
             <Label />
          </placeholder>
          <columns>
-            <TableColumn fx:id="supplierIdCol" prefWidth="50.0" style="-fx-font-size: 15; -fx-table-cell-border-color: #23B883;" text="ID" />
-          <TableColumn fx:id="supplierNameCol" prefWidth="229.0" style="-fx-font-size: 15; -fx-table-cell-border-color: #23B883;" text="Supplier" />
+            <TableColumn fx:id="idCol" prefWidth="50.0" style="-fx-font-size: 15; -fx-table-cell-border-color: #23B883;" text="ID" />
+          <TableColumn fx:id="nameCol" prefWidth="229.0" style="-fx-font-size: 15; -fx-table-cell-border-color: #23B883;" text="Customer" />
             <TableColumn fx:id="phoneNumberCol" prefWidth="199.0" style="-fx-font-size: 15; -fx-table-cell-border-color: #23B883;" text="Phone Number" />
-          <TableColumn fx:id="addressCol" prefWidth="238.0" style="-fx-font-size: 15; -fx-table-cell-border-color: #23B883;" text="Address" />
+          <TableColumn fx:id="emailCol" prefWidth="238.0" style="-fx-font-size: 15; -fx-table-cell-border-color: #23B883;" text="Email" />
         </columns>
       </TableView>
-      <TextField layoutX="64.0" layoutY="101.0" prefHeight="36.0" prefWidth="708.0" promptText="Searsh for Supplier" style="-fx-background-color: #EBEBEB; -fx-border-color: #23B883;" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0">
+      <TextField fx:id="searchTextField" layoutX="64.0" layoutY="101.0" prefHeight="36.0" prefWidth="708.0" promptText="Search for a customer" style="-fx-background-color: #EBEBEB; -fx-border-color: #23B883;" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0">
          <font>
             <Font size="16.0" />
          </font>
@@ -43,7 +43,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="newSupplierBtn" alignment="CENTER" layoutX="50.0" layoutY="395.0" mnemonicParsing="false" onAction="#newSupplierOnClick" prefHeight="40.0" prefWidth="190.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 10;" text="New Supplier" textFill="WHITE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="35.0">
+      <Button fx:id="newCustomerBtn" alignment="CENTER" layoutX="50.0" layoutY="395.0" mnemonicParsing="false" onAction="#newCustomerOnClick" prefHeight="40.0" prefWidth="190.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 10;" text="New Customer" textFill="WHITE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="35.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -51,7 +51,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="312.0" layoutY="37.0" prefHeight="31.0" prefWidth="294.0" text="Select Supplier" textFill="#0a6b49" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="31.0">
+      <Label layoutX="275.0" layoutY="34.0" prefHeight="31.0" prefWidth="294.0" text="Select Customer" textFill="#0a6b49" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="255.0" AnchorPane.topAnchor="34.0">
          <font>
             <Font name="System Bold" size="26.0" />
          </font>
