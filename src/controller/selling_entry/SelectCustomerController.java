@@ -3,6 +3,7 @@ package controller.selling_entry;
 import app.utils.DBUtils;
 import app.utils.HelperMethods;
 import app.utils.NameHolder;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,6 +38,7 @@ public class SelectCustomerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        confirmBtn.disableProperty().bind(Bindings.isEmpty(customersTableView.getSelectionModel().getSelectedItems()));
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));

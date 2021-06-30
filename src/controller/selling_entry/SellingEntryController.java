@@ -59,55 +59,11 @@ public class SellingEntryController implements Initializable {
     @FXML private TableColumn<Product, Integer> quantityCol;
     @FXML private TableColumn<Product, Double> totalCol;
 
-    private ObservableList<Product> getProducts(int billId){
-        ObservableList<Product> list = FXCollections.observableArrayList();
-
-        String sqlQuery = "SELECT\n" +
-                "products.product_id, products.product_name, bills_products.quantity, products.sold_price, products.category\n" +
-                "FROM products \n" +
-                "JOIN bills_products ON (products.product_id = bills_products.product_id)\n" +
-                "JOIN bills ON (bills.bill_id = bills_products.bill_id)\n" +
-                "WHERE bills.bill_id = " + billId;
-
-        Product product;
-        try (Connection c = DBUtils.getConnection()){
-
-            Statement st = c.createStatement();
-            ResultSet rs = st.executeQuery(sqlQuery);
-            while(rs.next()){
-                product = new Product(rs.getInt("product_id"),
-                        rs.getString("product_name"),
-                        rs.getDouble("sold_price"),
-                        rs.getString("category"),
-                        rs.getInt("quantity"),
-                        rs.getInt("quantity") * rs.getDouble("sold_price"));
-                list.add(product);
-            }
-        }
-        catch (Exception ex){
-            ex.printStackTrace();
-            System.out.println(ex.getMessage());
-        }
-        return list;
-    }
-
-    private double getTotal(){
-        double total = 0;
-        for (Product product : productsTableView.getItems()){
-            total += product.getTotal();
-        }
-        return total;
-    }
-
-    private void updateProducts(){
-        productsTableView.setItems(getProducts(NameHolder.billId));
-        totalPriceLabel.setText(String.format("%.2f", getTotal()).replace(",", "."));
-    }
-
     public void initialize(URL location, ResourceBundle resources) {
         slider.setTranslateX(-255);
         openSliderPane.setVisible(true);
         closeSliderPane.setVisible(false);
+        endTransactionBtn.setDisable(true);
 
         openSliderImage.setOnMouseClicked(event -> {
             TranslateTransition slide = new TranslateTransition();
@@ -185,13 +141,6 @@ public class SellingEntryController implements Initializable {
         editBtn.disableProperty().bind(Bindings.isEmpty(productsTableView
                 .getSelectionModel().getSelectedItems()));
 
-        productsTableView.getSelectionModel().selectedItemProperty().addListener(
-                (obs, oldValue, newValue) ->{
-                    endTransactionBtn.disableProperty().bind(Bindings.isEmpty(productsTableView.getItems()));
-                }
-        );
-
-
         try(Connection c = DBUtils.getConnection();
             Statement st = c.createStatement()){
             String sqlQuery = "INSERT INTO bills (cashier, customer_id) VALUES ('None', 0)";
@@ -206,6 +155,51 @@ public class SellingEntryController implements Initializable {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    private ObservableList<Product> getProducts(int billId){
+        ObservableList<Product> list = FXCollections.observableArrayList();
+
+        String sqlQuery = "SELECT\n" +
+                "products.product_id, products.product_name, bills_products.quantity, products.sold_price, products.category\n" +
+                "FROM products \n" +
+                "JOIN bills_products ON (products.product_id = bills_products.product_id)\n" +
+                "JOIN bills ON (bills.bill_id = bills_products.bill_id)\n" +
+                "WHERE bills.bill_id = " + billId;
+
+        Product product;
+        try (Connection c = DBUtils.getConnection()){
+
+            Statement st = c.createStatement();
+            ResultSet rs = st.executeQuery(sqlQuery);
+            while(rs.next()){
+                product = new Product(rs.getInt("product_id"),
+                        rs.getString("product_name"),
+                        rs.getDouble("sold_price"),
+                        rs.getString("category"),
+                        rs.getInt("quantity"),
+                        rs.getInt("quantity") * rs.getDouble("sold_price"));
+                list.add(product);
+            }
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    private double getTotal(){
+        double total = 0;
+        for (Product product : productsTableView.getItems()){
+            total += product.getTotal();
+        }
+        return total;
+    }
+
+    private void updateProducts(){
+        productsTableView.setItems(getProducts(NameHolder.billId));
+        totalPriceLabel.setText(String.format("%.2f", getTotal()).replace(",", "."));
     }
 
     public void dashboardOnClick(ActionEvent actionEvent) throws IOException {
@@ -261,6 +255,7 @@ public class SellingEntryController implements Initializable {
         Stage window = HelperMethods.openWindow("selling_entry/add-product.fxml", "Add product");
         window.setOnHidden((e) -> {
             updateProducts();
+            endTransactionBtn.disableProperty().bind(Bindings.isEmpty(productsTableView.getItems()));
         });
     }
 

@@ -30,10 +30,6 @@ public class AddSupplierController {
         registry = !registry.isEmpty() ? registry : "None";
         nif = !nif.isEmpty() ? nif : "None";
         nis = !nis.isEmpty() ? nis : "None";
-
-        System.out.println("registry = " + registry);
-        System.out.println("nif = " + nif);
-        System.out.println("nis = " + nis);
         String sqlQuery = "INSERT INTO suppliers (supplier_name, phone_number, address, registry, nif, nis)" +
                 "VALUES (?, ?, ?, ?, ?, ?)";
         try(Connection c = DBUtils.getConnection();

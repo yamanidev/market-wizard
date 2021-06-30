@@ -61,7 +61,7 @@ public class HelperMethods {
     }
 
     public static boolean isAlpha(String s) {
-        return s.matches("[a-zA-Z]+");
+        return s.matches("[a-zA-Z_ ]+");
     }
 
 
