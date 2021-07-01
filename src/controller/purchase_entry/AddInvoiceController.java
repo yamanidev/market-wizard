@@ -62,7 +62,7 @@ public class AddInvoiceController {
         if (validateFields()){
             addInvoice(selectedSupplierLabel.getText(),
                     dateOfPurchaseDatePicker.getValue().
-                            format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                            format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             ((Stage) cancelBtn.getScene().getWindow()).close();
         }
         else{

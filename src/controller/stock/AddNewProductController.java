@@ -1,22 +1,19 @@
-package controller.purchase_entry;
+package controller.stock;
 
 
 import app.utils.DBUtils;
 import app.utils.HelperMethods;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
 
 import static app.utils.HelperMethods.isNumeric;
 

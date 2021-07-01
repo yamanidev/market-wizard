@@ -8,6 +8,7 @@ public class NameHolder {
     public static int invoiceId;
     public static int productId;
     public static int customerId;
+    public static int supplierId;
     public static int billId;
     public static double totalAmount;
 }

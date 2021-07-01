@@ -14,10 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -33,6 +30,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SellingEntryController implements Initializable {
@@ -208,8 +206,9 @@ public class SellingEntryController implements Initializable {
     }
 
     public void dashboardOnClick(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/home/drakkath/IdeaProjects/MarketWizard/src/view/dashboard/dashboard.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../../view/dashboard/dashboard.fxml"));
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setTitle("Dashboard");
         Scene scene = new Scene(root,1280,679);
         window.setScene(scene);
         window.show();
@@ -218,6 +217,7 @@ public class SellingEntryController implements Initializable {
     public void sellingEntryOnClick(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("../../view/selling_entry/selling-entry.fxml"));
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setTitle("Selling Entry");
         Scene scene = new Scene(root,1280,679);
         window.setScene(scene);
         window.show();
@@ -226,6 +226,7 @@ public class SellingEntryController implements Initializable {
     public void stockOnClick(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("../../view/stock/stock.fxml"));
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setTitle("Stock");
         Scene scene = new Scene(root,1280,679);
         window.setScene(scene);
         window.show();
@@ -234,14 +235,16 @@ public class SellingEntryController implements Initializable {
     public void customersOnClick(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("../../view/customers/customers.fxml"));
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setTitle("Customers");
         Scene scene = new Scene(root,1280,679);
         window.setScene(scene);
         window.show();
     }
 
     public void suppliersOnClick(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/home/drakkath/IdeaProjects/MarketWizard/src/view/suppliers/suppliers.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../../view/suppliers/suppliers.fxml"));
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setTitle("Suppliers");
         Scene scene = new Scene(root,1280,679);
         window.setScene(scene);
         window.show();
@@ -321,5 +324,50 @@ public class SellingEntryController implements Initializable {
         window.setOnHidden((e) ->{
             selectedCustomerLabel.setText(NameHolder.customerName);
         });
+    }
+
+    public void logOutOnClick(ActionEvent event) throws IOException {
+        Alert alert =new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm logout");
+        alert.setHeaderText(null);
+        alert.setContentText("Continue logging out?");
+        Optional<ButtonType> action =alert.showAndWait();
+
+        if (action.get()==ButtonType.OK){
+            Parent root = FXMLLoader.load(getClass().getResource("../../view/login/login.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root,1280,679);
+            stage.setScene(scene);
+            stage.show();
+        }
+
+    }
+    public void exitOnClick(ActionEvent event) {
+        Alert alert =new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm exit");
+        alert.setHeaderText(null);
+        alert.setContentText("Do you really want to exit?");
+        Optional<ButtonType> action =alert.showAndWait();
+
+        if (action.get()==ButtonType.OK){
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.close();
+        }
+    }
+
+    public void homeOnClick(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("../../view/dashboard/dashboard.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root,1280,679);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void creditsOnClick(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("../../view/credits/credits.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root,1280,679);
+        stage.setScene(scene);
+        stage.show();
     }
 }

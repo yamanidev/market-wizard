@@ -1,4 +1,4 @@
-package controller.purchase_entry;
+package controller.stock;
 
 import app.utils.DBUtils;
 import app.utils.HelperMethods;
@@ -37,8 +37,9 @@ public class EditProductController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String sqlQuery = "SELECT product_name, purchased_price, sold_price, expiration_date," +
-                "category FROM products WHERE product_id = "
+        String sqlQuery = "SELECT product_name, purchased_price, sold_price," +
+                "quantity, category, " +
+                "expiration_date FROM products WHERE product_id = "
                 + NameHolder.productId;
         try (Connection c = DBUtils.getConnection()){
             Statement st = c.createStatement();
@@ -48,6 +49,7 @@ public class EditProductController implements Initializable {
                     String.valueOf(rs.getDouble("purchased_price")));
             soldPriceTextField.setText(
                     String.valueOf(rs.getDouble("sold_price")));
+            quantityTextField.setText(String.valueOf(rs.getInt("quantity")));
             DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             expirationDatePicker.setValue(
                     LocalDate.parse(rs.getString("expiration_date"), df)
@@ -59,46 +61,16 @@ public class EditProductController implements Initializable {
             System.out.println(e.getMessage());
         }
 
-        sqlQuery = "SELECT product_quantity FROM invoices_products WHERE invoice_id = " + NameHolder.invoiceId +
-                " AND product_id = " + NameHolder.productId;
-        try(Connection c = DBUtils.getConnection()){
-            Statement st = c.createStatement();
-            ResultSet rs = st.executeQuery(sqlQuery);
-            quantityTextField.setText(String.valueOf(rs.getInt("product_quantity")));
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
-
     }
 
     public void editProduct(int productId, String productName, double purchasedPrice, double soldPrice,
-                            String expirationDate, int quantity, String category){
-        int previousQuantity = 0;
-        // Getting previously added quantity from invoices_products
-        String sqlQuery = "SELECT product_quantity FROM invoices_products " +
-                "WHERE invoice_id = " + NameHolder.invoiceId + " AND product_id = " + NameHolder.productId;
+                            String expirationDate, String category){
 
-        try(Connection c = DBUtils.getConnection()){
-            Statement st = c.createStatement();
-            ResultSet rs = st.executeQuery(sqlQuery);
-            previousQuantity = rs.getInt("product_quantity");
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
-
-        // Calculating the quantity to be added
-        int newQuantity = quantity - previousQuantity;
-
-        sqlQuery = "UPDATE products SET product_name = ?," +
+        String sqlQuery = "UPDATE products SET product_name = ?," +
                 "purchased_price = ?," +
                 "sold_price = ?," +
                 "expiration_date = ?," +
-                "quantity = (quantity + ?)," +
-                "category = ?" +
+                "category = ? " +
                 "WHERE product_id = " + productId;
         try(Connection c = DBUtils.getConnection();
             PreparedStatement pstm = c.prepareStatement(sqlQuery)){
@@ -106,8 +78,7 @@ public class EditProductController implements Initializable {
             pstm.setDouble(2, purchasedPrice);
             pstm.setDouble(3, soldPrice);
             pstm.setString(4, expirationDate);
-            pstm.setInt(5, newQuantity);
-            pstm.setString(6, category);
+            pstm.setString(5, category);
             pstm.execute();
         }
         catch (SQLException e){
@@ -115,17 +86,6 @@ public class EditProductController implements Initializable {
             System.out.println(e.getMessage());
         }
 
-
-        sqlQuery = "UPDATE invoices_products SET product_quantity = " + quantity +
-        " WHERE invoice_id = " + NameHolder.invoiceId + " AND product_id = " + NameHolder.productId;
-        try(Connection c = DBUtils.getConnection();
-            PreparedStatement pstm = c.prepareStatement(sqlQuery)){
-            pstm.execute();
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
     }
 
     public void confirmOnClick(ActionEvent actionEvent) {
@@ -134,7 +94,6 @@ public class EditProductController implements Initializable {
                     Double.parseDouble(purchasedPriceTextField.getText()),
                     Double.parseDouble(soldPriceTextField.getText()),
                     expirationDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                    Integer.parseInt(quantityTextField.getText()),
                     categoryTextField.getText());
             ((Stage) cancelBtn.getScene().getWindow()).close();
         }

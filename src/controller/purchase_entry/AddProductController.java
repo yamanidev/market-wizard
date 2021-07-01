@@ -84,7 +84,7 @@ public class AddProductController {
 
                     purchasedPriceTextField.setText(String.valueOf(rs.getDouble("purchased_price")));
                     soldPriceTextField.setText(String.valueOf(rs.getDouble("sold_price")));
-                    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     expirationDatePicker.setValue(
                             LocalDate.parse(rs.getString("expiration_date"), df));
                 }

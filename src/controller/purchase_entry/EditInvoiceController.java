@@ -34,7 +34,7 @@ public class EditInvoiceController implements Initializable {
                 Statement st = c.createStatement();
                 ResultSet rs = st.executeQuery(sqlQuery);
             selectedSupplierLabel.setText(rs.getString("supplier"));
-            DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             dateOfPurchaseDatePicker.setValue(
                     LocalDate.parse(rs.getString("date_of_purchase"), df));
         }
@@ -75,7 +75,7 @@ public class EditInvoiceController implements Initializable {
     public void confirmOnClick(ActionEvent actionEvent) {
         editInvoice(selectedSupplierLabel.getText(),
                 dateOfPurchaseDatePicker.getValue().
-                        format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                        format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         ((Stage) cancelBtn.getScene().getWindow()).close();
     }
 

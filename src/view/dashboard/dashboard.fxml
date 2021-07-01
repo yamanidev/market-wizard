@@ -1,14 +1,345 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.dashboard.DashboardController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dashboard.DashboardController">
+    <children>
+        <BorderPane maxHeight="720.0" maxWidth="1280.0" prefHeight="679.0" prefWidth="1280.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="1240.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" fx:id="x">
+                    <BorderPane.margin>
+                        <Insets left="-255.0" />
+                    </BorderPane.margin>
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="157.0" layoutX="153.0" layoutY="102.0" stroke="#d72828" strokeType="INSIDE" width="157.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="157.0" layoutX="505.0" layoutY="102.0" stroke="#dec215" strokeType="INSIDE" width="157.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="157.0" layoutX="857.0" layoutY="102.0" stroke="#23b883" strokeType="INSIDE" width="157.0" AnchorPane.rightAnchor="226.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="157.0" layoutX="153.0" layoutY="374.0" stroke="#23b883" strokeType="INSIDE" width="157.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="157.0" layoutX="505.0" layoutY="374.0" stroke="#23b883" strokeType="INSIDE" width="157.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="157.0" layoutX="857.0" layoutY="374.0" stroke="#23b883" strokeType="INSIDE" width="157.0" />
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="106.0" prefHeight="40.0" prefWidth="100.0" text="Expired" textAlignment="JUSTIFY" textFill="#d72828">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_CENTER" layoutX="183.0" layoutY="144.0" prefHeight="40.0" prefWidth="100.0" text="Products" textAlignment="JUSTIFY" textFill="#d72828">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="532.0" layoutY="107.0" prefHeight="40.0" prefWidth="100.0" text="Stock-out" textAlignment="JUSTIFY" textFill="#dec215">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_CENTER" layoutX="532.0" layoutY="145.0" prefHeight="40.0" prefWidth="100.0" text="Products" textAlignment="JUSTIFY" textFill="#dec215">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="888.0" layoutY="102.0" prefHeight="40.0" prefWidth="100.0" text="Near" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_CENTER" layoutX="888.0" layoutY="140.0" prefHeight="40.0" prefWidth="100.0" text="Stock-out" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="182.0" layoutY="378.0" prefHeight="40.0" prefWidth="100.0" text="Suppliers" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_CENTER" layoutX="182.0" layoutY="416.0" prefHeight="40.0" prefWidth="100.0" text="Number" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="534.0" layoutY="372.0" prefHeight="40.0" prefWidth="100.0" text="Products" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_CENTER" layoutX="534.0" layoutY="410.0" prefHeight="40.0" prefWidth="100.0" text="Number" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="880.0" layoutY="374.0" prefHeight="40.0" prefWidth="118.0" text="Customers" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_CENTER" layoutX="887.0" layoutY="415.0" prefHeight="40.0" prefWidth="100.0" text="Number" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="458.0" layoutY="30.0" prefHeight="40.0" prefWidth="258.0" text="Needs your attention" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="463.0" layoutY="299.0" prefHeight="40.0" prefWidth="258.0" text="Business status" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="expiredProductsLabel" alignment="BOTTOM_CENTER" layoutX="180.0" layoutY="182.0" prefHeight="40.0" prefWidth="100.0" text="0" textAlignment="JUSTIFY" textFill="#d72828">
+                     <font>
+                        <Font size="45.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="stockOutLabel" alignment="BOTTOM_CENTER" layoutX="532.0" layoutY="182.0" prefHeight="40.0" prefWidth="100.0" text="0" textAlignment="JUSTIFY" textFill="#dec215">
+                     <font>
+                        <Font size="45.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nearStockOutLabel" alignment="BOTTOM_CENTER" layoutX="889.0" layoutY="182.0" prefHeight="40.0" prefWidth="100.0" text="0" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font size="45.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="suppliersCountLabel" alignment="BOTTOM_CENTER" layoutX="183.0" layoutY="449.0" prefHeight="40.0" prefWidth="100.0" text="0" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font size="45.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="productsCountLabel" alignment="BOTTOM_CENTER" layoutX="538.0" layoutY="449.0" prefHeight="40.0" prefWidth="100.0" text="0" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font size="45.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="customersCountLabel" alignment="BOTTOM_CENTER" layoutX="891.0" layoutY="449.0" prefHeight="40.0" prefWidth="100.0" text="0" textAlignment="JUSTIFY" textFill="#23b883">
+                     <font>
+                        <Font size="45.0" />
+                     </font>
+                  </Label>
+               </children>
+                </AnchorPane>
+            </center>
+            <top>
+                <AnchorPane maxHeight="54.0" maxWidth="1358.0" prefHeight="54.0" prefWidth="1358.0" style="-fx-background-color: #23B883; -fx-background-radius: 0px 0px 25px 0px;" stylesheets="@../../resources/styles/dashboard.css" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox maxHeight="54.0" maxWidth="1208.0" prefHeight="54.0" prefWidth="1208.0" spacing="20.0" stylesheets="@../../resources/styles/dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <Button alignment="CENTER" contentDisplay="CENTER" minHeight="36.0" minWidth="149.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="149.0" style="-fx-background-radius: 42.5px; -fx-background-color: #FFFF; -fx-text-fill: #23B883;" text="Dashboard" textAlignment="CENTER" textFill="WHITE">
+                                    <HBox.margin>
+                                        <Insets left="149.0" top="7.0" />
+                                    </HBox.margin>
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="1.0" />
+                                    </padding>
+                                </Button>
+                                <Button fx:id="sellingEntryBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="31.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sellingEntryOnClick" prefHeight="40.0" prefWidth="160.0" style="-fx-background-radius: 42.5px;" styleClass="Button" text="Selling entry" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0" top="7.0" />
+                                    </HBox.margin>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                    <padding>
+                                        <Insets bottom="1.0" />
+                                    </padding>
+                                </Button>
+                                <Button fx:id="stockBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="488.0" layoutY="31.0" minHeight="30.0" minWidth="0.0" mnemonicParsing="false" onAction="#stockOnClick" prefHeight="40.0" prefWidth="100.0" style="-fx-background-radius: 42.5px;" styleClass="Button" text="Stock" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0" top="7.0" />
+                                    </HBox.margin>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                    <padding>
+                                        <Insets bottom="1.0" />
+                                    </padding>
+                                </Button>
+                                <Button fx:id="suppliersBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="726.0" layoutY="10.0" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#suppliersOnClick" prefHeight="40.0" prefWidth="140.0" style="-fx-background-radius: 42.5px;" styleClass="Button" text="Suppliers" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0" top="7.0" />
+                                    </HBox.margin>
+                                    <padding>
+                                        <Insets bottom="1.0" />
+                                    </padding>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button fx:id="customersBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="1162.0" layoutY="31.0" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#customersOnClick" prefHeight="40.0" prefWidth="148.0" style="-fx-background-radius: 42.5px;" styleClass="Button" text="Customers" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0" top="7.0" />
+                                    </HBox.margin>
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                    <padding>
+                                        <Insets bottom="1.0" />
+                                    </padding>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button fx:id="purchaseEntryBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="1466.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#purchaseEntryOnClick" prefHeight="40.0" prefWidth="170.0" style="-fx-background-radius: 42.5px;" text="Purchase entry" textAlignment="CENTER" textFill="#23b883">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0" top="7.0" />
+                                    </HBox.margin>
+                                    <padding>
+                                        <Insets bottom="1.0" />
+                                    </padding>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets />
+                    </BorderPane.margin></AnchorPane>
+            </top>
+            <left>
+                <AnchorPane fx:id="slider" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="655.0" prefWidth="295.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 0px 0px 100px 0px;" BorderPane.alignment="BOTTOM_LEFT">
+                    <children>
+                        <VBox layoutX="-2.0" layoutY="3.0" maxHeight="264.0" maxWidth="295.0" minHeight="200.0" prefHeight="264.0" prefWidth="295.0" AnchorPane.bottomAnchor="361.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <Pane prefHeight="24.0" prefWidth="295.0" style="-fx-background-color: #23B883;">
+                                    <VBox.margin>
+                                        <Insets top="-24.0" />
+                                    </VBox.margin>
+                                </Pane>
+                                <Circle fx:id="imageCircle" fill="DODGERBLUE" radius="69.0" stroke="WHITE" strokeType="INSIDE" style="-fx-fill: white;">
+                                    <VBox.margin>
+                                        <Insets bottom="16.0" left="79.0" top="38.0" />
+                                    </VBox.margin>
+                                </Circle>
+                                <Label alignment="CENTER" contentDisplay="CENTER" minHeight="42.0" minWidth="206.0" prefHeight="42.0" prefWidth="206.0" text="Shop name" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets left="44.0" right="44.0" top="16.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <ImageView fx:id="openSliderImage" fitHeight="52.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="-12.0" AnchorPane.topAnchor="-23.0">
+                            <image>
+                                <Image url="@../../resources/img/logo-circle.png" />
+                            </image>
+                            <viewport>
+                                <Rectangle2D />
+                            </viewport>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                        <Pane fx:id="openSliderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="625.0" prefHeight="656.0" prefWidth="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <ImageView fitHeight="21.0" fitWidth="21.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" rotate="180.0" x="10.0" y="305.0">
+                                    <image>
+                                        <Image url="@../../resources/img/Polygon.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                            </children>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor></Pane>
+                        <Pane fx:id="closeSliderPane" layoutX="265.0" layoutY="10.0" maxHeight="625.0" maxWidth="40.0" minHeight="625.0" prefHeight="656.0" prefWidth="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <ImageView fitHeight="21.0" fitWidth="21.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" style="-fx-image: images\Polygon.png;" x="10.0" y="305.0">
+                                    <image>
+                                        <Image url="@../../resources/img/Polygon.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                    <viewport>
+                                        <Rectangle2D />
+                                    </viewport>
+                                </ImageView>
+                            </children>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Pane>
+                        <VBox layoutX="67.0" layoutY="285.0" prefHeight="250.0" prefWidth="168.0" spacing="20.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="288.0">
+                            <children>
+                                <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#homeOnClick" prefHeight="37.0" prefWidth="168.0" style="-fx-background-color: white; -fx-text-fill: #0A6B49; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" text="Home">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button fx:id="creditsBtn" mnemonicParsing="false" onAction="#creditsOnClick" prefHeight="37.0" prefWidth="168.0" style="-fx-background-color: #0A6B49; -fx-text-fill: white; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" text="Credits">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button fx:id="logOutBtn" mnemonicParsing="false" onAction="#logOutOnClick" prefHeight="37.0" prefWidth="168.0" style="-fx-background-color: #0A6B49; -fx-text-fill: white; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" text="Log out">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitOnClick" prefHeight="37.0" prefWidth="168.0" style="-fx-background-color: #0A6B49; -fx-text-fill: white; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" text="Exit">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                            </children>
+                        </VBox>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets top="-30.0" />
+                    </BorderPane.margin>
+                </AnchorPane>
+            </left>
+        </BorderPane>
+    </children>
 </AnchorPane>

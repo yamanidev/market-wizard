@@ -75,5 +75,6 @@ public class EditCustomerController implements Initializable {
     }
 
     public void cancelOnClick(ActionEvent actionEvent) {
+        ((Stage) cancelBtn.getScene().getWindow()).close();
     }
 }
