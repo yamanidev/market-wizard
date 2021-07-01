@@ -6,12 +6,15 @@ import app.utils.NameHolder;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Product;
@@ -22,6 +25,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class SelectProductController implements Initializable {
+    @FXML private TextField searchTextField;
     @FXML private Button confirmBtn;
     @FXML private Button cancelBtn;
     @FXML private TableView<Product> productsTableView;
@@ -45,6 +49,27 @@ public class SelectProductController implements Initializable {
                 .getSelectionModel().getSelectedItems()));
 
         updateProducts();
+
+        FilteredList<Product> productsFilteredList = new FilteredList<>(getProducts(), b -> true);
+        searchTextField.textProperty().addListener((observable,oldValue,newValue) -> {
+            productsFilteredList.setPredicate(product -> {
+                if (newValue==null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (product.getName().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }
+                else  if (product.getCategory().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }
+                else return false;
+            });
+        });
+        SortedList<Product> productsSortedList = new SortedList<>(productsFilteredList);
+        productsSortedList.comparatorProperty().bind(productsTableView.comparatorProperty());
+        productsTableView.setItems(productsSortedList);
     }
 
     private ObservableList<Product> getProducts(){

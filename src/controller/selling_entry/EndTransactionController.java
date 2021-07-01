@@ -44,7 +44,13 @@ public class EndTransactionController implements Initializable {
     }
 
     private double getBalance(){
-        return NameHolder.totalAmount - Double.parseDouble(amountPaidTextField.getText());
+        try{
+            return NameHolder.totalAmount - Double.parseDouble(amountPaidTextField.getText());
+        }
+        catch (NumberFormatException e){
+            System.out.println("amountPaidTextField : " + amountPaidTextField.getText());
+            return NameHolder.totalAmount;
+        }
     }
 
     private void addBalanceToCustomer(int customerId, double balance){

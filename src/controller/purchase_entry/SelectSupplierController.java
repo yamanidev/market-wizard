@@ -6,12 +6,15 @@ import app.utils.NameHolder;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Supplier;
@@ -23,6 +26,7 @@ import java.util.ResourceBundle;
 
 public class SelectSupplierController implements Initializable {
 
+    @FXML private TextField searchTextField;
     @FXML private Button newSupplierBtn;
     @FXML private Button cancelBtn;
     @FXML private Button confirmBtn;
@@ -40,7 +44,30 @@ public class SelectSupplierController implements Initializable {
         supplierIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
-        suppliersTableView.setItems(getSuppliers());
+        updateSuppliers();
+
+        FilteredList<Supplier> supplierFilteredList = new FilteredList<>(getSuppliers(), b -> true);
+        searchTextField.textProperty().addListener((observable,oldValue,newValue) -> {
+            supplierFilteredList.setPredicate(supplier -> {
+                if (newValue==null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (supplier.getSupplierName().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }
+                else  if (supplier.getPhoneNumber().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                } else  if (supplier.getAddress().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }
+                else return false;
+            });
+        });
+        SortedList<Supplier> supplierSortedList = new SortedList<>(supplierFilteredList);
+        supplierSortedList.comparatorProperty().bind(suppliersTableView.comparatorProperty());
+        suppliersTableView.setItems(supplierSortedList);
     }
 
     public void updateSuppliers(){

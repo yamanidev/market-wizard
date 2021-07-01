@@ -13,7 +13,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../view/selling_entry/selling-entry.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../view/customers/customers.fxml"));
         primaryStage.setTitle("Purchase Entry");
 
         Platform.runLater(root::requestFocus);

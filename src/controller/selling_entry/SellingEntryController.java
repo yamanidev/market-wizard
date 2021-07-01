@@ -232,7 +232,7 @@ public class SellingEntryController implements Initializable {
     }
 
     public void customersOnClick(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/home/drakkath/IdeaProjects/MarketWizard/src/view/customers/customers.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../../view/customers/customers.fxml"));
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root,1280,679);
         window.setScene(scene);
@@ -307,10 +307,12 @@ public class SellingEntryController implements Initializable {
         NameHolder.totalAmount = Double.parseDouble(totalPriceLabel.getText());
         Stage window = HelperMethods.openWindow("selling_entry/end-transaction.fxml",
                     "End Transaction");
-        selectedCustomerLabel.setText("None");
-        NameHolder.customerId = 0;
-        productsTableView.getItems().clear();
-        totalPriceLabel.setText("000000.00");
+        window.setOnHidden((e) -> {
+            selectedCustomerLabel.setText("None");
+            NameHolder.customerId = 0;
+            productsTableView.getItems().clear();
+            totalPriceLabel.setText("000000.00");
+        });
     }
 
     public void selectCustomerOnClick(ActionEvent actionEvent) throws IOException {

@@ -13,6 +13,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HelperMethods {
 
@@ -64,5 +66,10 @@ public class HelperMethods {
         return s.matches("[a-zA-Z_ ]+");
     }
 
-
+    public static boolean isEmail(String s){
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(s);
+        return matcher.matches();
+    }
 }

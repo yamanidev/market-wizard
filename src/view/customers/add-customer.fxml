@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="525.0" prefWidth="436.0" style="-fx-border-color: #23B883; -fx-border-width: 5px;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customers.AddCustomerController">
+   <children>
+      <Label layoutX="106.0" layoutY="74.0" prefHeight="38.0" prefWidth="236.0" text="New Customer" textFill="#0a6b49" AnchorPane.leftAnchor="106.0" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="74.0">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <VBox layoutX="79.0" layoutY="161.0" prefHeight="204.0" prefWidth="300.0" spacing="20.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="161.0">
+         <children>
+            <TextField fx:id="nameTextField" prefHeight="40.0" prefWidth="300.0" promptText="Name" style="-fx-border-color: #23B883; -fx-background-color: #EBEBEB;">
+               <font>
+                  <Font size="16.3" />
+               </font>
+            </TextField>
+            <TextField fx:id="phoneNumberTextField" prefHeight="40.0" prefWidth="300.0" promptText="Phone number" style="-fx-border-color: #23B883; -fx-background-color: #EBEBEB;">
+               <font>
+                  <Font size="16.3" />
+               </font>
+            </TextField>
+            <TextField fx:id="emailTextField" prefHeight="40.0" prefWidth="300.0" promptText="Email address" style="-fx-border-color: #23B883; -fx-background-color: #EBEBEB;">
+               <font>
+                  <Font size="16.3" />
+               </font>
+            </TextField>
+         </children>
+      </VBox>
+      <HBox layoutX="81.0" layoutY="389.0" maxHeight="37.0" prefHeight="37.0" prefWidth="275.0" spacing="40.0">
+         <children>
+            <Button fx:id="confirmBtn" maxHeight="0.0" mnemonicParsing="false" onAction="#confirmOnClick" prefHeight="37.0" prefWidth="130.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 11px;" text="Confirm" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="cancelBtn" layoutX="10.0" layoutY="10.0" maxHeight="0.0" mnemonicParsing="false" onAction="#cancelOnClick" prefHeight="37.0" prefWidth="130.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 11px;" text="Cancel" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -64,37 +64,6 @@ public class PurchaseEntryController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        invoiceIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        dateOfPurchaseCol.setCellValueFactory(new PropertyValueFactory<>("dateOfPurchase"));
-        supplierCol.setCellValueFactory(new PropertyValueFactory<>("supplier"));
-        invoicesTableView.setItems(getInvoices());
-
-        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        productCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        priceOfUnitCol.setCellValueFactory(new PropertyValueFactory<>("purchasedPrice"));
-        quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
-        totalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
-
-        editInvoiceBtn.disableProperty().bind(Bindings.isEmpty(invoicesTableView
-                .getSelectionModel().getSelectedItems()));
-        deleteInvoiceBtn.disableProperty().bind(Bindings.isEmpty(invoicesTableView
-                .getSelectionModel().getSelectedItems()));
-
-        addProductBtn.disableProperty().bind(Bindings.isEmpty(invoicesTableView
-                .getSelectionModel().getSelectedItems()));
-        editProductBtn.disableProperty().bind(Bindings.isEmpty(productsTableView
-                .getSelectionModel().getSelectedItems()));
-        deleteProductBtn.disableProperty().bind(Bindings.isEmpty(productsTableView
-                .getSelectionModel().getSelectedItems()));
-
-        invoicesTableView.getSelectionModel().selectedItemProperty().addListener(
-                (obs, oldValue, newValue) ->{
-                    updateProducts();
-                    endTransactionBtn.disableProperty().bind(Bindings.isEmpty(productsTableView.getItems()));
-                }
-        );
-
         slider.setTranslateX(-255);
         openSliderPane.setVisible(true);
         closeSliderPane.setVisible(false);
@@ -150,6 +119,37 @@ public class PurchaseEntryController implements Initializable {
                 closeSliderPane.setVisible(false);
             });
         });
+
+        invoiceIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        dateOfPurchaseCol.setCellValueFactory(new PropertyValueFactory<>("dateOfPurchase"));
+        supplierCol.setCellValueFactory(new PropertyValueFactory<>("supplier"));
+        invoicesTableView.setItems(getInvoices());
+
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        priceOfUnitCol.setCellValueFactory(new PropertyValueFactory<>("purchasedPrice"));
+        quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        totalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
+
+        editInvoiceBtn.disableProperty().bind(Bindings.isEmpty(invoicesTableView
+                .getSelectionModel().getSelectedItems()));
+        deleteInvoiceBtn.disableProperty().bind(Bindings.isEmpty(invoicesTableView
+                .getSelectionModel().getSelectedItems()));
+
+        addProductBtn.disableProperty().bind(Bindings.isEmpty(invoicesTableView
+                .getSelectionModel().getSelectedItems()));
+        editProductBtn.disableProperty().bind(Bindings.isEmpty(productsTableView
+                .getSelectionModel().getSelectedItems()));
+        deleteProductBtn.disableProperty().bind(Bindings.isEmpty(productsTableView
+                .getSelectionModel().getSelectedItems()));
+
+        invoicesTableView.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldValue, newValue) ->{
+                    updateProducts();
+                    endTransactionBtn.disableProperty().bind(Bindings.isEmpty(productsTableView.getItems()));
+                }
+        );
 
     }
 

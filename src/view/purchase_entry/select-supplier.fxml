@@ -22,7 +22,7 @@
           <TableColumn fx:id="addressCol" prefWidth="238.0" style="-fx-font-size: 15; -fx-table-cell-border-color: #23B883;" text="Address" />
         </columns>
       </TableView>
-      <TextField layoutX="64.0" layoutY="101.0" prefHeight="36.0" prefWidth="708.0" promptText="Searsh for Supplier" style="-fx-background-color: #EBEBEB; -fx-border-color: #23B883;" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0">
+      <TextField fx:id="searchTextField" layoutX="64.0" layoutY="101.0" prefHeight="36.0" prefWidth="708.0" promptText="Searsh for Supplier" style="-fx-background-color: #EBEBEB; -fx-border-color: #23B883;" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0">
          <font>
             <Font size="16.0" />
          </font>

@@ -6,6 +6,8 @@ import app.utils.NameHolder;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,6 +46,30 @@ public class SelectCustomerController implements Initializable {
         phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         updateCustomers();
+
+        FilteredList<Customer> customersFilteredList = new FilteredList<>(getCustomers(), b -> true);
+        searchTextField.textProperty().addListener((observable,oldValue,newValue) -> {
+            customersFilteredList.setPredicate(customer -> {
+                if (newValue==null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (customer.getName().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }
+                else  if (customer.getEmail().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }
+                else  if (customer.getPhoneNumber().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }
+                else return false;
+            });
+        });
+        SortedList<Customer> customersSortedList = new SortedList<>(customersFilteredList);
+        customersSortedList.comparatorProperty().bind(customersTableView.comparatorProperty());
+        customersTableView.setItems(customersSortedList);
     }
 
     private void updateCustomers(){

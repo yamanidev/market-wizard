@@ -8,7 +8,7 @@ public class Customer {
     private String phoneNumber;
     private String email;
 
-    public Customer(int id, Double balance, String name, String phoneNumber, String email) {
+    public Customer(int id, String name, String phoneNumber, String email, double balance) {
         this.id = id;
         this.balance = balance;
         this.name = name;

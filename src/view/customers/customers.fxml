@@ -1,14 +1,293 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.customers.CustomersController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customers.CustomersController">
+    <children>
+        <BorderPane prefHeight="679.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="1240.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" fx:id="x">
+                    <children>
+                        <HBox alignment="CENTER" layoutX="62.0" layoutY="46.0" prefHeight="44.0" prefWidth="1596.0" spacing="64.0" AnchorPane.leftAnchor="82.0" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="30.0">
+                            <children>
+                                <TextField fx:id="searchTextField" maxHeight="-Infinity" prefHeight="44.0" prefWidth="676.0" promptText="Search for a customer" style="-fx-background-color: #EBEBEB; -fx-border-color: #23B883; -fx-prompt-text-fill: #676767;">
+                                    <font>
+                                        <Font size="19.0" />
+                                    </font>
+                                </TextField>
+                            </children>
+                        </HBox>
+                        <TableView fx:id="customersTableView" layoutX="146.0" layoutY="127.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="415.0" prefWidth="1076.0" style="-fx-border-color: #23B883; -fx-background-color: #EBEBEB; -fx-table-cell-border-color: #23B883; -fx-cell-size: 36.5;" AnchorPane.leftAnchor="82.0" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="107.0">
+                            <placeholder>
+                                <Label />
+                            </placeholder>
+                            <columns>
+                                <TableColumn fx:id="idCol" maxWidth="300.0" minWidth="72.66667175292969" prefWidth="72.66667175292969" style="-fx-font-size: 19;" text="ID" />
+                                <TableColumn fx:id="nameCol" maxWidth="339.3333282470703" minWidth="175.0" prefWidth="339.3333282470703" style="-fx-font-size: 19;" text="Customer name" />
+                                <TableColumn fx:id="phoneNumberCol" maxWidth="300.0" minWidth="118.666748046875" prefWidth="205.6666259765625" style="-fx-font-size: 19;" text="Phone number" />
+                                <TableColumn fx:id="emailCol" maxWidth="300.0" minWidth="89.3333740234375" prefWidth="216.0" style="-fx-font-size: 19;" text="Email" />
+                                <TableColumn fx:id="balanceCol" maxWidth="314.6666259765625" minWidth="175.0" prefWidth="241.0" style="-fx-font-size: 19; -fx-cell-size: 40;" text="Balance" />
+                            </columns>
+                        </TableView>
+                  <HBox alignment="CENTER" layoutX="83.0" layoutY="522.0" prefHeight="100.0" prefWidth="1076.0" spacing="50.0">
+                     <children>
+                              <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addOnClick" prefHeight="44.0" prefWidth="240.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 12.5;" text="Add new customer" textFill="WHITE">
+                                  <font>
+                                      <Font size="20.0" />
+                                  </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                              </Button>
+                        <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editOnClick" prefHeight="44.0" prefWidth="240.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 12.5;" text="Edit" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteOnClick" prefHeight="44.0" prefWidth="240.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 12.5;" text="Delete" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+                    </children>
+               <BorderPane.margin>
+                  <Insets left="-255.0" />
+               </BorderPane.margin>
+                </AnchorPane>
+            </center>
+            <top>
+                <AnchorPane maxHeight="54.0" maxWidth="1358.0" prefHeight="54.0" prefWidth="1280.0" style="-fx-background-color: #23B883; -fx-background-radius: 0px 0px 25px 0px;" stylesheets="@../../resources/styles/dashboard.css" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox maxHeight="54.0" maxWidth="1208.0" prefHeight="54.0" prefWidth="1208.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <Button fx:id="dashboardBtn" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#dashboardOnClick" prefHeight="40.0" prefWidth="149.0" style="-fx-background-radius: 42.5px;" text="Dashboard" textAlignment="CENTER" textFill="WHITE">
+                                    <HBox.margin>
+                                        <Insets left="149.0" top="7.0" />
+                                    </HBox.margin>
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="1.0" />
+                                    </padding>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                                </Button>
+                                <Button fx:id="sellingBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="31.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sellingEntryOnClick" prefHeight="40.0" prefWidth="160.0" style="-fx-background-radius: 42.5px;" text="Selling entry" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0" top="7.0" />
+                                    </HBox.margin>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                    <padding>
+                                        <Insets bottom="1.0" />
+                                    </padding>
+                                </Button>
+                                <Button fx:id="stockBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="488.0" layoutY="31.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#stockOnClick" prefHeight="40.0" prefWidth="100.0" style="-fx-background-radius: 42.5px;" text="Stock" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0" top="7.0" />
+                                    </HBox.margin>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                    <padding>
+                                        <Insets bottom="1.0" />
+                                    </padding>
+                                </Button>
+                                <Button fx:id="suppliersBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="726.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#suppliersOnClick" prefHeight="40.0" prefWidth="140.0" style="-fx-background-radius: 42.5px;" text="Suppliers" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0" top="7.0" />
+                                    </HBox.margin>
+                                    <padding>
+                                        <Insets bottom="1.0" />
+                                    </padding>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button fx:id="customersBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="1162.0" layoutY="31.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#customersOnClick" prefHeight="40.0" prefWidth="148.0" style="-fx-background-radius: 42.5px; -fx-background-color: #FFFF; -fx-text-fill: #23B883;" text="Customers" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0" top="7.0" />
+                                    </HBox.margin>
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                    <padding>
+                                        <Insets bottom="1.0" />
+                                    </padding>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button fx:id="purchaseEntryBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="1466.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#purchaseEntryOnClick" prefHeight="40.0" prefWidth="170.0" style="-fx-background-radius: 42.5px;" text="Purchase entry" textAlignment="CENTER" textFill="#23b883">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0" top="7.0" />
+                                    </HBox.margin>
+                                    <padding>
+                                        <Insets bottom="1.0" />
+                                    </padding>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets />
+                    </BorderPane.margin></AnchorPane>
+            </top>
+            <left>
+                <AnchorPane fx:id="slider" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="655.0" prefWidth="295.0" style="-fx-background-color: #0A6B49; -fx-background-radius: 0px 0px 100px 0px;" BorderPane.alignment="BOTTOM_LEFT">
+                    <children>
+                        <VBox layoutX="-2.0" layoutY="3.0" maxHeight="264.0" maxWidth="295.0" minHeight="200.0" prefHeight="264.0" prefWidth="295.0" AnchorPane.bottomAnchor="361.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                        <Pane prefHeight="24.0" prefWidth="295.0" style="-fx-background-color: #23B883;">
+                           <VBox.margin>
+                              <Insets top="-24.0" />
+                           </VBox.margin>
+                        </Pane>
+                                <Circle fx:id="imageCircle" fill="DODGERBLUE" radius="69.0" stroke="WHITE" strokeType="INSIDE" style="-fx-fill: white;">
+                                    <VBox.margin>
+                                        <Insets bottom="16.0" left="79.0" top="38.0" />
+                                    </VBox.margin>
+                                </Circle>
+                                <Label alignment="CENTER" contentDisplay="CENTER" minHeight="42.0" minWidth="206.0" prefHeight="42.0" prefWidth="206.0" text="Shop name" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets left="44.0" right="44.0" top="16.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <ImageView fx:id="openSliderImage" fitHeight="52.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="-12.0" AnchorPane.topAnchor="-23.0">
+                            <image>
+                                <Image url="@../../resources/img/logo-circle.png" />
+                            </image>
+                            <viewport>
+                                <Rectangle2D />
+                            </viewport>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                        <Pane fx:id="openSliderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="625.0" prefHeight="656.0" prefWidth="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <ImageView fitHeight="21.0" fitWidth="21.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" rotate="180.0" x="10.0" y="305.0">
+                                    <image>
+                                        <Image url="@../../resources/img/Polygon.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                            </children>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor></Pane>
+                        <Pane fx:id="closeSliderPane" layoutX="265.0" layoutY="10.0" maxHeight="625.0" maxWidth="40.0" minHeight="625.0" prefHeight="656.0" prefWidth="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <ImageView fitHeight="21.0" fitWidth="21.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" x="10.0" y="305.0">
+                                    <image>
+                                        <Image url="@../../resources/img/Polygon.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                    <viewport>
+                                        <Rectangle2D />
+                                    </viewport>
+                                </ImageView>
+                            </children>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Pane>
+                        <VBox layoutX="67.0" layoutY="285.0" prefHeight="250.0" prefWidth="168.0" spacing="20.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="288.0">
+                            <children>
+                                <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#homeOnClick" prefHeight="37.0" prefWidth="168.0" style="-fx-background-color: #0A6B49; -fx-text-fill: white; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" text="Home">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button fx:id="creditsBtn" mnemonicParsing="false" onAction="#creditsOnClick" prefHeight="37.0" prefWidth="168.0" style="-fx-background-color: #0A6B49; -fx-text-fill: white; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" text="Credits">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button fx:id="logOutBtn" mnemonicParsing="false" onAction="#logOutOnClick" prefHeight="37.0" prefWidth="168.0" style="-fx-background-color: #0A6B49; -fx-text-fill: white; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" text="Log out">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitOnClick" prefHeight="37.0" prefWidth="168.0" style="-fx-background-color: #0A6B49; -fx-text-fill: white; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: white;" text="Exit">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                            </children>
+                        </VBox>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets top="-30.0" />
+                    </BorderPane.margin>
+                </AnchorPane>
+            </left>
+        </BorderPane>
+    </children>
 </AnchorPane>
