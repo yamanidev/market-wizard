@@ -107,7 +107,6 @@ public class SuppliersController implements Initializable {
             TranslateTransition slide = new TranslateTransition();
             slide.setDuration(Duration.seconds(0.4));
             slide.setNode(slider);
-            System.out.println("kasjdhwo rani nakhdem");
             slide.setToX(0);
             slide.play();
 
